@@ -1,0 +1,9 @@
+package.json
+yarn.json
+public
+CHANGELOG.md
+.yarn
+dist
+node_modules
+.next
+build
