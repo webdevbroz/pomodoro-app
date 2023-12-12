@@ -1,3 +1,5 @@
+import Placeholder from "./src/components/placeholder";
+
 export default function Home() {
-  return <div>Place Holder</div>;
+  return <Placeholder />;
 }
