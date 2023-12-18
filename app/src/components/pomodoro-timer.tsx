@@ -13,7 +13,8 @@ export default function PomodoroTimer() {
 
   const minutes = String(Math.floor(timeRemaining / 60));
   const seconds = String(timeRemaining % 60).padStart(2, '0'); // Pad the seconds with '0' to ensure it's always two digits
-  const percentage = (timeRemaining / 1500) * 100;
+  const focusTimePercentage = (timeRemaining / 1500) * 100;
+  const breakTimePercentage = (timeRemaining / 300) * 100;
 
   function startTimer() {
     intervalId.current = window.setInterval(() => setTimeRemaining((currentTimeRemaining) => currentTimeRemaining - 1), 1000) as unknown as number;
@@ -24,16 +25,6 @@ export default function PomodoroTimer() {
         clearInterval(intervalId.current);
       };
     };
-  }
-
-  function stopAndResetTimer() {
-    if(intervalId.current !== null) {
-      clearInterval(intervalId.current);
-    };
-    intervalId.current = null;
-    setTimeRemaining(1500);
-    setIsTimerActive(false);
-    setIsFocusTime(false);
   }
 
   function pauseTimer() {
@@ -66,10 +57,9 @@ export default function PomodoroTimer() {
   return (
     <div className="h-[410px] w-[410px]">
       <div className="relative flex flex-col items-center justify-center rounded-full bg-primary-dark">
-        <CircularProgress percentage={percentage} colour="#f87070" minutes={minutes} seconds={seconds} />
+        <CircularProgress percentage={isFocusTime ? focusTimePercentage : breakTimePercentage} colour="#f87070" minutes={minutes} seconds={seconds} />
         <div className="absolute inset-x-[205] top-[275px] flex flex-col gap-1">
           {isTimerActive ? <Button onClick={pauseTimer}>Pause</Button> : <Button onClick={startTimer}>Start</Button>}
-          <Button onClick={stopAndResetTimer}>Reset</Button>
         </div>
       </div>
     </div>
