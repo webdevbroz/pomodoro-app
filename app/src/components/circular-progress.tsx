@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-const cleanPercentage = (percentage: number | string): number => {
+export const cleanPercentage = (percentage: number | string): number => {
   const isNegativeOrNaN = !Number.isFinite(+percentage) || +percentage < 0; // we can set non-numbers to 0 here
   const isTooHigh = +percentage > 100;
   return isNegativeOrNaN ? 0 : isTooHigh ? 100 : +percentage;
