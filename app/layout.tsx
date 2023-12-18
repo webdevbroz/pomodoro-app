@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${kumbh.variable} ${roboto.variable} ${space.variable}`}>
         <div className="flex min-h-screen flex-col">
           <main className="flex-1">
-            <div className="container max-w-[1440px] pb-8 pt-6">{children}</div>
+            <div className="container flex max-w-[1440px] flex-col items-center lg:pt-6">{children}</div>
           </main>
         </div>
       </body>
