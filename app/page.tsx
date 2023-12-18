@@ -1,4 +1,3 @@
-// import Placeholder from './src/components/placeholder';
 import Logo from "./src/components/Logo";
 export default function Home() {
   return (
