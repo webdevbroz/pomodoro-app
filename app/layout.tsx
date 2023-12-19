@@ -10,7 +10,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${kumbh.variable} ${roboto.variable} ${space.variable}`}>{children}</body>
+      <body className={`${kumbh.variable} ${roboto.variable} ${space.variable}`}>
+        <div className="flex min-h-screen flex-col">
+          <main className="flex-1">
+            <div className="container flex max-w-[1440px] flex-col items-center lg:pt-6">{children}</div>
+          </main>
+        </div>
+      </body>
     </html>
   );
 }
