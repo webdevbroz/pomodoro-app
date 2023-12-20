@@ -1,7 +1,12 @@
 /**
  * @jest-environment jsdom
  */
-import { ProgressCircle, RenderTimerText, StringToTextElement, CircularProgress } from '@/src/components/circular-progress';
+import {
+  CircularProgress,
+  ProgressCircle,
+  RenderTimerText,
+  StringToTextElement,
+} from '@/src/components/circular-progress';
 import { render, screen } from '@testing-library/react';
 
 describe('ProgressCircle', () => {
@@ -9,7 +14,13 @@ describe('ProgressCircle', () => {
     const testColour = 'lightgrey';
     const testPercentage = 80;
 
-    render(<ProgressCircle data-testid={`progress-circle-${testColour}-test`} colour={testColour} percentage={testPercentage} />);
+    render(
+      <ProgressCircle
+        data-testid={`progress-circle-${testColour}-test`}
+        colour={testColour}
+        percentage={testPercentage}
+      />
+    );
     const progressCircle = screen.getByTestId(`progress-circle-${testColour}-test`);
 
     // test that the progress circle is rendered
@@ -103,7 +114,6 @@ describe('RenderTimerText', () => {
   });
 });
 
-
 describe('CircularProgress', () => {
   const testColour = 'blue';
   const testPercentage = 50;
@@ -113,26 +123,54 @@ describe('CircularProgress', () => {
   const testSecondsToString = testSeconds.toString();
 
   test('renders the circular progress component', () => {
-    render(<CircularProgress colour={testColour} percentage={testPercentage} minutes={testMinutesToString} seconds={testSecondsToString} />);
+    render(
+      <CircularProgress
+        colour={testColour}
+        percentage={testPercentage}
+        minutes={testMinutesToString}
+        seconds={testSecondsToString}
+      />
+    );
     const progressElement = screen.getByTestId('circular-progress-test');
     expect(progressElement).toBeInTheDocument();
   });
 
   test('renders progress circle component', () => {
-    render(<CircularProgress colour={testColour} percentage={testPercentage} minutes={testMinutesToString} seconds={testSecondsToString} />);
+    render(
+      <CircularProgress
+        colour={testColour}
+        percentage={testPercentage}
+        minutes={testMinutesToString}
+        seconds={testSecondsToString}
+      />
+    );
     const upperCircle = screen.getByTestId(`progress-circle-${testColour}-test`);
     expect(upperCircle).toHaveAttribute('stroke', 'blue');
     expect(upperCircle).toHaveAttribute('stroke-dashoffset', expect.any(String));
   });
 
   test('renders timer text component', () => {
-    render(<CircularProgress colour={testColour} percentage={testPercentage} minutes={testMinutesToString} seconds={testSecondsToString} />);
+    render(
+      <CircularProgress
+        colour={testColour}
+        percentage={testPercentage}
+        minutes={testMinutesToString}
+        seconds={testSecondsToString}
+      />
+    );
     const timerText = screen.getByTestId('render-timer-text-test');
     expect(timerText).toHaveTextContent('10:20');
   });
 
   test('handles invalid percentage values correctly', () => {
-    render(<CircularProgress colour="blue" percentage={-testPercentage} minutes={testMinutesToString} seconds={testSecondsToString} />);
+    render(
+      <CircularProgress
+        colour="blue"
+        percentage={-testPercentage}
+        minutes={testMinutesToString}
+        seconds={testSecondsToString}
+      />
+    );
     const upperCircle = screen.getByTestId(`progress-circle-${testColour}-test`);
     expect(upperCircle).toHaveAttribute('stroke-dashoffset', expect.any(String));
   });

@@ -19,6 +19,8 @@ export const ProgressCircle = ({
   const r = 197.5; // (r * 2) + strokeWidth needs to equal the size of the intended circle - this this case 410
   const circ = 2 * Math.PI * r;
   const strokePercentage = ((100 - +percentage) * circ) / 100; // where stroke will start, e.g. from 15% to 100%.
+  const stroke = strokePercentage !== circ ? colour : ''; // if strokePercentage is 100% then we don't want to show the stroke
+  const strokeDashoffset = percentage ? strokePercentage : 0; // if percentage is 0 then we don't want to show the stroke
   return (
     <circle
       data-testid={`progress-circle-${colour}-test`}
@@ -26,22 +28,16 @@ export const ProgressCircle = ({
       cx={-5}
       // cy={-105} // Can remove this and inclde in transform translate attribute
       fill="transparent"
-      stroke={strokePercentage !== circ ? colour : ''} // remove colour as 0% sets full circumference
+      stroke={stroke} // remove colour as 0% sets full circumference
       strokeWidth={15}
       strokeDasharray={circ}
-      strokeDashoffset={percentage ? strokePercentage : 0}
+      strokeDashoffset={strokeDashoffset}
       transform="scale(1, -1) translate(0, -205)" // this flips the progress bar to empty clockwise
     ></circle>
   );
 };
 
-export const StringToTextElement = ({
-  text,
-  xvalue,
-}: {
-  text: string;
-  xvalue: number;
-}): ReactElement => {
+export const StringToTextElement = ({ text, xvalue }: { text: string; xvalue: number }): ReactElement => {
   return (
     <>
       {text.split('').map((char, index) => (
@@ -61,19 +57,15 @@ export const StringToTextElement = ({
   );
 };
 
-export const RenderTimerText = ({
-  minutes,
-  seconds,
-}: {
-  minutes: string;
-  seconds: string;
-}): ReactElement => {
+export const RenderTimerText = ({ minutes, seconds }: { minutes: string; seconds: string }): ReactElement => {
+  const xLogic = 205 - 21.66 / 2;
+  const yLogic = 205 + 21.66;
   return (
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text
     // 21.66 is the width of the semicolon html element
     <g data-testid="render-timer-text-test">
       <StringToTextElement xvalue={27} text={minutes} />
-      <text className="fill-on-dark-background text-8xl" x={205 - 21.66 / 2} y={205 + 21.66}>
+      <text className="fill-on-dark-background text-8xl" x={xLogic} y={yLogic}>
         :
       </text>
       <StringToTextElement xvalue={60} text={seconds} />
