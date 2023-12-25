@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 
 const config: Config = {
-  content: ['./app/**/*.{ts,tsx}',],
+  content: ['./app/**/*.{ts,tsx}'],
   theme: {
     container: {
       center: true,
@@ -21,6 +21,22 @@ const config: Config = {
         'secondary-peach': 'var(--secondary-peach)',
         'secondary-aqua': 'var(--secondary-aqua)',
         'secondary-purple': 'var(--secondary-purple)',
+      },
+      height: {
+        '112': '27rem'
+      },
+      width: {
+        '29': '7.313rem',
+        '34': '9.75rem',
+        '128': '32rem',
+      },
+      minWidth: {
+        '1': '23rem',
+      },
+      maxHeight: {
+        '128': '41rem',
+        '132': '50rem',
+        '142': '64rem'
       },
       fontFamily: {
         kumbh: ['var(--font-kumbh-sans)', ...fontFamily.sans],
