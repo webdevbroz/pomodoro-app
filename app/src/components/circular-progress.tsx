@@ -23,7 +23,7 @@ export const ProgressCircle = ({
   const strokeDashoffset = percentage ? strokePercentage : 0; // if percentage is 0 then we don't want to show the stroke
   return (
     <circle
-      data-testid={`progress-circle-${colour}-test`}
+      data-test-id={`progress-circle-${colour}-test`}
       r={r}
       cx={-5}
       // cy={-105} // Can remove this and inclde in transform translate attribute
@@ -42,7 +42,7 @@ export const StringToTextElement = ({ text, xvalue }: { text: string; xvalue: nu
     <>
       {text.split('').map((char, index) => (
         <text
-          data-testid={`strings-to-text-element-test-${index}`}
+          data-test-id={`strings-to-text-element-test-${index}`}
           className="fill-on-dark-background text-8xl font-bold"
           dominantBaseline="central"
           textAnchor="middle"
@@ -63,7 +63,7 @@ export const RenderTimerText = ({ minutes, seconds }: { minutes: string; seconds
   return (
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text
     // 21.66 is the width of the semicolon html element
-    <g data-testid="render-timer-text-test">
+    <g data-test-id="render-timer-text-test">
       <StringToTextElement xvalue={27} text={minutes} />
       <text className="fill-on-dark-background text-8xl" x={xLogic} y={yLogic}>
         :
@@ -86,10 +86,10 @@ export const CircularProgress = ({
 }): ReactElement => {
   const pct = cleanPercentage(percentage);
   return (
-    <svg data-testid="circular-progress-test" className="flex" width={410} height={410}>
+    <svg data-test-id="circular-progress-test" className="flex" width={410} height={410}>
       <g transform={`rotate(-90 ${'100 100'})`}>
-        <ProgressCircle data-testid="progress-circle-lower" colour="lightgrey" percentage={percentage} />
-        <ProgressCircle data-testid="progress-circle-upper" colour={colour} percentage={pct} />
+        <ProgressCircle data-test-id="progress-circle-lower" colour="lightgrey" percentage={percentage} />
+        <ProgressCircle data-test-id="progress-circle-upper" colour={colour} percentage={pct} />
       </g>
       <RenderTimerText minutes={minutes} seconds={seconds} />
     </svg>

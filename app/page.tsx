@@ -8,7 +8,7 @@ export default function Home() {
         <Logo />
       </div>
       <div className="h-32 w-full border-4 border-white"></div>
-      <div className="h-112 w-full flex justify-center">
+      <div className="flex h-112 w-full justify-center">
         <PomodoroTimer />
       </div>
       <div className="h-32 w-full border-4 border-white"></div>
