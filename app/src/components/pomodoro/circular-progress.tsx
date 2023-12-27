@@ -32,6 +32,7 @@ export const ProgressCircle = ({
       strokeWidth={15}
       strokeDasharray={circ}
       strokeDashoffset={strokeDashoffset}
+      strokeLinecap="round"
       transform="scale(1, -1) translate(0, -205)" // this flips the progress bar to empty clockwise
     ></circle>
   );
