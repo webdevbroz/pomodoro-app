@@ -1,4 +1,4 @@
-import Logo from './src/components/Logo';
+import Logo from './src/components/logo';
 import PomodoroTimer from './src/components/pomodoro-timer';
 
 export default function Home() {
