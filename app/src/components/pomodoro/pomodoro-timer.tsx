@@ -2,8 +2,8 @@
 
 // This is a client component 👈🏽
 import { useEffect, useRef, useState } from 'react';
+import { Button } from '../ui/button';
 import { CircularProgress } from './circular-progress';
-import { Button } from './ui/button';
 
 export default function PomodoroTimer() {
   const [timeRemaining, setTimeRemaining] = useState<number>(1500);
