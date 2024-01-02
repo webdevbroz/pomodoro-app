@@ -98,18 +98,18 @@ describe('RenderTimerText', () => {
 
     // test that the timer text component has the correct third child
     const thirdChild = timerText.children[2];
-    expect(thirdChild).toHaveAttribute('x', '194.17');
-    expect(thirdChild).toHaveAttribute('y', '226.66');
+    expect(thirdChild).toHaveAttribute('x', '191.67');
+    expect(thirdChild).toHaveAttribute('y', '240.66');
     expect(thirdChild).toHaveTextContent(':');
 
     // test that the timer text component has the correct fourth child
     const fourthChild = timerText.children[3];
-    expect(fourthChild).toHaveAttribute('x', '60%');
+    expect(fourthChild).toHaveAttribute('x', '59%');
     expect(fourthChild).toHaveTextContent(testSecondsToString[0]);
 
     // test that the timer text component has the correct fifth child
     const fifthChild = timerText.children[4];
-    expect(fifthChild).toHaveAttribute('x', '73%');
+    expect(fifthChild).toHaveAttribute('x', '72%');
     expect(fifthChild).toHaveTextContent(testSecondsToString[1]);
   });
 });

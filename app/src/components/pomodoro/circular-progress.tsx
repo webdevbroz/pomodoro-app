@@ -23,7 +23,7 @@ export const ProgressCircle = ({
   const strokeDashoffset = percentage ? strokePercentage : 0; // if percentage is 0 then we don't want to show the stroke
   return (
     <circle
-      data-test-id={`progress-circle-${colour}-test`}
+      data-testid={`progress-circle-${colour}-test`}
       r={r}
       cx={-5}
       // cy={-105} // Can remove this and inclde in transform translate attribute
@@ -33,7 +33,7 @@ export const ProgressCircle = ({
       strokeDasharray={circ}
       strokeDashoffset={strokeDashoffset}
       strokeLinecap="round"
-      transform="scale(1, -1) translate(0, -205)" // this flips the progress bar to empty clockwise
+      transform="scale(1, 1) translate(0, 205)" // empty counterclockwise
     ></circle>
   );
 };
@@ -43,7 +43,7 @@ export const StringToTextElement = ({ text, xvalue }: { text: string; xvalue: nu
     <>
       {text.split('').map((char, index) => (
         <text
-          data-test-id={`strings-to-text-element-test-${index}`}
+          data-testid={`strings-to-text-element-test-${index}`}
           className="fill-on-dark-background text-8xl font-bold"
           dominantBaseline="central"
           textAnchor="middle"
@@ -59,17 +59,17 @@ export const StringToTextElement = ({ text, xvalue }: { text: string; xvalue: nu
 };
 
 export const RenderTimerText = ({ minutes, seconds }: { minutes: string; seconds: string }): ReactElement => {
-  const xLogic = 205 - 21.66 / 2;
-  const yLogic = 205 + 21.66;
+  const xLogic = 205 - 26.66 / 2;
+  const yLogic = 205 + 35.66;
   return (
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text
-    // 21.66 is the width of the semicolon html element
-    <g data-test-id="render-timer-text-test">
+    // xlogic and ylogic refers to the positioning of the semicolon.
+    <g data-testid="render-timer-text-test">
       <StringToTextElement xvalue={27} text={minutes} />
-      <text className="fill-on-dark-background text-8xl" x={xLogic} y={yLogic}>
+      <text className="fill-on-dark-background text-8xl font-bold" x={xLogic} y={yLogic}>
         :
       </text>
-      <StringToTextElement xvalue={60} text={seconds} />
+      <StringToTextElement xvalue={59} text={seconds} />
     </g>
   );
 };
@@ -87,10 +87,10 @@ export const CircularProgress = ({
 }): ReactElement => {
   const pct = cleanPercentage(percentage);
   return (
-    <svg data-test-id="circular-progress-test" className="flex" width={410} height={410}>
+    <svg data-testid="circular-progress-test" className="flex" width={410} height={410}>
       <g transform={`rotate(-90 ${'100 100'})`}>
-        <ProgressCircle data-test-id="progress-circle-lower" colour="lightgrey" percentage={percentage} />
-        <ProgressCircle data-test-id="progress-circle-upper" colour={colour} percentage={pct} />
+        <ProgressCircle data-testid="progress-circle-lower" colour="lightgrey" percentage={percentage} />
+        <ProgressCircle data-testid="progress-circle-upper" colour={colour} percentage={pct} />
       </g>
       <RenderTimerText minutes={minutes} seconds={seconds} />
     </svg>
