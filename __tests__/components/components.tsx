@@ -6,7 +6,7 @@ import {
   ProgressCircle,
   RenderTimerText,
   StringToTextElement,
-} from '@/src/components/circular-progress';
+} from '@/src/components/pomodoro/circular-progress';
 import { render, screen } from '@testing-library/react';
 
 describe('ProgressCircle', () => {
