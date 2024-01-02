@@ -21,9 +21,14 @@ const config: Config = {
         'secondary-peach': 'var(--secondary-peach)',
         'secondary-aqua': 'var(--secondary-aqua)',
         'secondary-purple': 'var(--secondary-purple)',
+        'desaturated-blue': 'var(--desaturated-blue)',
+        'dark-blue': 'var(--dark-blue)',
+      },
+      dropShadow: {
+        primary: ['-70px -30px 50px rgb(39 44 90 / 100%)', '30px 30px 70px rgb(18 21 48 / 100%)'],
       },
       height: {
-        '112': '27rem'
+        '112': '27rem',
       },
       width: {
         '29': '7.313rem',
@@ -36,7 +41,7 @@ const config: Config = {
       maxHeight: {
         '128': '41rem',
         '132': '50rem',
-        '142': '64rem'
+        '142': '64rem',
       },
       fontFamily: {
         kumbh: ['var(--font-kumbh-sans)', ...fontFamily.sans],

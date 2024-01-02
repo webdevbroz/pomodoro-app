@@ -20,7 +20,7 @@ export const ProgressCircle = ({ colour, percentage }: ProgressCircleProps): Rea
   // An SVG circle with stroke-width renders two concentric circles (or a doughnut like image)
   // with its internal radius as r - ½ the stroke width and its external radius as r + ½ stroke-width.\
   // For a circle with d=400, r should be (r - strokeWidth / 2)
-  const r = 197.5; // (r * 2) + strokeWidth needs to equal the size of the intended circle - this this case 410
+  const r = 163.5; // (r * 2) + strokeWidth needs to equal the size of the intended circle - this this case 339
   const circ = 2 * Math.PI * r;
   const strokePercentage = ((100 - percentage) * circ) / 100; // where stroke will start, e.g. from 15% to 100%.
   const stroke = strokePercentage !== circ ? colour : ''; // if strokePercentage is 100% then we don't want to show the stroke
@@ -33,7 +33,7 @@ export const ProgressCircle = ({ colour, percentage }: ProgressCircleProps): Rea
       // cy={-105} // Can remove this and inclde in transform translate attribute
       fill="transparent"
       stroke={stroke} // remove colour as 0% sets full circumference
-      strokeWidth={15}
+      strokeWidth={12}
       strokeDasharray={circ}
       strokeDashoffset={strokeDashoffset}
       strokeLinecap="round"
@@ -63,8 +63,8 @@ export const StringToTextElement = ({ text, xvalue }: { text: string; xvalue: nu
 };
 
 export const RenderTimerText = ({ minutes, seconds }: RenderTimerTextProps): ReactElement => {
-  const xLogic = 205 - 26.66 / 2;
-  const yLogic = 205 + 35.66;
+  const xLogic = 205 - 27.66 / 2;
+  const yLogic = 205 + 33.66;
   return (
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text
     // xlogic and ylogic refers to the positioning of the semicolon.
@@ -81,9 +81,10 @@ export const RenderTimerText = ({ minutes, seconds }: RenderTimerTextProps): Rea
 export const CircularTimer = ({ colour, percentage, minutes, seconds }: CircularTimerProps): ReactElement => {
   const pct = cleanPercentage(percentage);
   return (
-    <svg data-testid="circular-progress-test" className="flex" width={410} height={410}>
-      <g transform={`rotate(-90 ${'100 100'})`}>
+    <svg data-testid="circular-progress-test" className="flex rounded-full bg-gradient-to-r from-dark-blue to-desaturated-blue drop-shadow-primary" width="100%" height="100%">
+      <g transform={`rotate(-90 ${'100 100'})`} fill="black">
         <ProgressCircle data-testid="progress-circle-lower" colour="lightgrey" percentage={percentage} />
+        <circle r={185.5} cx={-5} fill="#161932" transform="scale(1, 1) translate(0, 205)"></circle>
         <ProgressCircle data-testid="progress-circle-upper" colour={colour} percentage={pct} />
       </g>
       <RenderTimerText minutes={minutes} seconds={seconds} />

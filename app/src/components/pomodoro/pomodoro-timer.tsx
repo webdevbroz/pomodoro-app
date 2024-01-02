@@ -60,7 +60,7 @@ export default function PomodoroTimer() {
 
   return (
     <div className="h-[410px] w-[410px]">
-      <div className="relative flex flex-col items-center justify-center rounded-full bg-primary-dark">
+      <div className="relative flex h-[100%] flex-col items-center justify-center rounded-full bg-primary-dark">
         <CircularTimer percentage={percentage} colour="#f87070" minutes={minutes} seconds={seconds} />
         <div className="absolute inset-x-[205] top-[275px] flex flex-col gap-1">
           {isTimerActive ? (
