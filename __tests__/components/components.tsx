@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 import {
-  CircularProgress,
   ProgressCircle,
+  CircularTimer,
   RenderTimerText,
   StringToTextElement,
 } from '@/src/components/pomodoro/circular-progress';
@@ -114,7 +114,7 @@ describe('RenderTimerText', () => {
   });
 });
 
-describe('CircularProgress', () => {
+describe('ProgressCircle', () => {
   const testColour = 'blue';
   const testPercentage = 50;
   const testMinutes = 10;
@@ -124,7 +124,7 @@ describe('CircularProgress', () => {
 
   test('renders the circular progress component', () => {
     render(
-      <CircularProgress
+      <CircularTimer
         colour={testColour}
         percentage={testPercentage}
         minutes={testMinutesToString}
@@ -137,7 +137,7 @@ describe('CircularProgress', () => {
 
   test('renders progress circle component', () => {
     render(
-      <CircularProgress
+      <CircularTimer
         colour={testColour}
         percentage={testPercentage}
         minutes={testMinutesToString}
@@ -151,7 +151,7 @@ describe('CircularProgress', () => {
 
   test('renders timer text component', () => {
     render(
-      <CircularProgress
+      <CircularTimer
         colour={testColour}
         percentage={testPercentage}
         minutes={testMinutesToString}
@@ -164,7 +164,7 @@ describe('CircularProgress', () => {
 
   test('handles invalid percentage values correctly', () => {
     render(
-      <CircularProgress
+      <CircularTimer
         colour="blue"
         percentage={-testPercentage}
         minutes={testMinutesToString}

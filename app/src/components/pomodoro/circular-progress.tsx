@@ -1,24 +1,28 @@
 import { ReactElement } from 'react';
 
-export const cleanPercentage = (percentage: number | string): number => {
-  const isNegativeOrNaN = !Number.isFinite(+percentage) || +percentage < 0; // we can set non-numbers to 0 here
-  const isTooHigh = +percentage > 100;
-  return isNegativeOrNaN ? 0 : isTooHigh ? 100 : +percentage;
+interface CircularTimerProps {
+  colour: string;
+  percentage: number;
+  minutes: string;
+  seconds: string;
+}
+
+type ProgressCircleProps = Pick<CircularTimerProps, 'colour' | 'percentage'>;
+type RenderTimerTextProps = Pick<CircularTimerProps, 'minutes' | 'seconds'>;
+
+export const cleanPercentage = (percentage: number): number => {
+  const isNegative = !Number.isFinite(percentage) || percentage < 0; // we can set non-numbers to 0 here
+  const isTooHigh = percentage > 100;
+  return isNegative ? 0 : isTooHigh ? 100 : percentage;
 };
 
-export const ProgressCircle = ({
-  colour,
-  percentage,
-}: {
-  colour: string;
-  percentage: number | string;
-}): ReactElement => {
+export const ProgressCircle = ({ colour, percentage }: ProgressCircleProps): ReactElement => {
   // An SVG circle with stroke-width renders two concentric circles (or a doughnut like image)
   // with its internal radius as r - ½ the stroke width and its external radius as r + ½ stroke-width.\
   // For a circle with d=400, r should be (r - strokeWidth / 2)
   const r = 197.5; // (r * 2) + strokeWidth needs to equal the size of the intended circle - this this case 410
   const circ = 2 * Math.PI * r;
-  const strokePercentage = ((100 - +percentage) * circ) / 100; // where stroke will start, e.g. from 15% to 100%.
+  const strokePercentage = ((100 - percentage) * circ) / 100; // where stroke will start, e.g. from 15% to 100%.
   const stroke = strokePercentage !== circ ? colour : ''; // if strokePercentage is 100% then we don't want to show the stroke
   const strokeDashoffset = percentage ? strokePercentage : 0; // if percentage is 0 then we don't want to show the stroke
   return (
@@ -58,7 +62,7 @@ export const StringToTextElement = ({ text, xvalue }: { text: string; xvalue: nu
   );
 };
 
-export const RenderTimerText = ({ minutes, seconds }: { minutes: string; seconds: string }): ReactElement => {
+export const RenderTimerText = ({ minutes, seconds }: RenderTimerTextProps): ReactElement => {
   const xLogic = 205 - 26.66 / 2;
   const yLogic = 205 + 35.66;
   return (
@@ -74,17 +78,7 @@ export const RenderTimerText = ({ minutes, seconds }: { minutes: string; seconds
   );
 };
 
-export const CircularProgress = ({
-  colour,
-  percentage,
-  minutes,
-  seconds,
-}: {
-  colour: string;
-  percentage: number;
-  minutes: string;
-  seconds: string;
-}): ReactElement => {
+export const CircularTimer = ({ colour, percentage, minutes, seconds }: CircularTimerProps): ReactElement => {
   const pct = cleanPercentage(percentage);
   return (
     <svg data-testid="circular-progress-test" className="flex" width={410} height={410}>

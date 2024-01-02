@@ -3,7 +3,7 @@
 // This is a client component 👈🏽
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '../ui/button';
-import { CircularProgress } from './circular-progress';
+import { CircularTimer } from './circular-progress';
 
 export default function PomodoroTimer() {
   const [timeRemaining, setTimeRemaining] = useState<number>(1500);
@@ -61,7 +61,7 @@ export default function PomodoroTimer() {
   return (
     <div className="h-[410px] w-[410px]">
       <div className="relative flex flex-col items-center justify-center rounded-full bg-primary-dark">
-        <CircularProgress percentage={percentage} colour="#f87070" minutes={minutes} seconds={seconds} />
+        <CircularTimer percentage={percentage} colour="#f87070" minutes={minutes} seconds={seconds} />
         <div className="absolute inset-x-[205] top-[275px] flex flex-col gap-1">
           {isTimerActive ? (
             <Button
