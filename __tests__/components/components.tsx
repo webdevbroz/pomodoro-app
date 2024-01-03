@@ -30,7 +30,7 @@ describe('ProgressCircle', () => {
     expect(progressCircle).toHaveAttribute('stroke', testColour);
 
     // test that the progress circle has the correct percentage
-    const r = 197.5;
+    const r = 163.5;
     const circ = 2 * Math.PI * r;
     const strokePercentage = ((100 - +testPercentage) * circ) / 100;
     const strokePercentageToString = strokePercentage.toString();
@@ -98,8 +98,8 @@ describe('RenderTimerText', () => {
 
     // test that the timer text component has the correct third child
     const thirdChild = timerText.children[2];
-    expect(thirdChild).toHaveAttribute('x', '191.67');
-    expect(thirdChild).toHaveAttribute('y', '240.66');
+    expect(thirdChild).toHaveAttribute('x', '191.17');
+    expect(thirdChild).toHaveAttribute('y', '238.66');
     expect(thirdChild).toHaveTextContent(':');
 
     // test that the timer text component has the correct fourth child

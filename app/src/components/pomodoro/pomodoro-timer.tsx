@@ -62,7 +62,7 @@ export default function PomodoroTimer(): ReactElement {
     const pauseOrStartOnClick: () => void = isTimerActive ? pauseTimer : startTimer;
     const pauseOrStartText: string = isTimerActive ? 'PAUSE' : 'START';
     return (
-      <div className="absolute inset-x-[205] top-[275px] flex flex-col gap-1">
+      <div className="absolute top-[65%] flex items-center justify-center">
         <Button
           variant="ghost-peach"
           className="pr-0 font-bold tracking-[1em] text-on-dark-background"
@@ -75,7 +75,7 @@ export default function PomodoroTimer(): ReactElement {
   };
 
   return (
-    <div className="h-[410px] w-[410px]">
+    <div className="h-[300px] w-[300px] md:h-[410px] md:w-[410px]">
       <div className="relative flex h-[100%] flex-col items-center justify-center rounded-full bg-primary-dark">
         <CircularTimer percentage={percentage} colour="#f87070" minutes={minutes} seconds={seconds} />
         <TimerButton />

@@ -11,7 +11,7 @@ type ProgressCircleProps = Pick<CircularTimerProps, 'colour' | 'percentage'>;
 type RenderTimerTextProps = Pick<CircularTimerProps, 'minutes' | 'seconds'>;
 
 const X_AXIS = -5;
-const TRANSFORM = "scale(1, 1) translate(0, 205)";
+const TRANSFORM = 'scale(1, 1) translate(0, 205)';
 
 export const cleanPercentage = (percentage: number): number => {
   const isNegative = !Number.isFinite(percentage) || percentage < 0; // we can set non-numbers to 0 here
@@ -84,7 +84,13 @@ export const RenderTimerText = ({ minutes, seconds }: RenderTimerTextProps): Rea
 export const CircularTimer = ({ colour, percentage, minutes, seconds }: CircularTimerProps): ReactElement => {
   const pct = cleanPercentage(percentage);
   return (
-    <svg data-testid="circular-progress-test" className="flex rounded-full bg-gradient-to-r from-dark-blue to-desaturated-blue drop-shadow-primary" width="100%" height="100%">
+    <svg
+      data-testid="circular-progress-test"
+      className="flex rounded-full bg-gradient-to-r from-dark-blue to-desaturated-blue drop-shadow-primary"
+      height="100%"
+      width="100%"
+      viewBox="0 0 410 410"
+    >
       <g transform={`rotate(-90 ${'100 100'})`} fill="black">
         <ProgressCircle data-testid="progress-circle-lower" colour="lightgrey" percentage={percentage} />
         <circle r={183.5} cx={X_AXIS} fill="#161932" transform={TRANSFORM}></circle>
