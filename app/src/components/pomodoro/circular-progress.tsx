@@ -10,6 +10,9 @@ interface CircularTimerProps {
 type ProgressCircleProps = Pick<CircularTimerProps, 'colour' | 'percentage'>;
 type RenderTimerTextProps = Pick<CircularTimerProps, 'minutes' | 'seconds'>;
 
+const X_AXIS = -5;
+const TRANSFORM = "scale(1, 1) translate(0, 205)";
+
 export const cleanPercentage = (percentage: number): number => {
   const isNegative = !Number.isFinite(percentage) || percentage < 0; // we can set non-numbers to 0 here
   const isTooHigh = percentage > 100;
@@ -29,7 +32,7 @@ export const ProgressCircle = ({ colour, percentage }: ProgressCircleProps): Rea
     <circle
       data-testid={`progress-circle-${colour}-test`}
       r={r}
-      cx={-5}
+      cx={X_AXIS}
       // cy={-105} // Can remove this and inclde in transform translate attribute
       fill="transparent"
       stroke={stroke} // remove colour as 0% sets full circumference
@@ -37,7 +40,7 @@ export const ProgressCircle = ({ colour, percentage }: ProgressCircleProps): Rea
       strokeDasharray={circ}
       strokeDashoffset={strokeDashoffset}
       strokeLinecap="round"
-      transform="scale(1, 1) translate(0, 205)" // empty counterclockwise
+      transform={TRANSFORM} // empty counterclockwise
     ></circle>
   );
 };
@@ -84,7 +87,7 @@ export const CircularTimer = ({ colour, percentage, minutes, seconds }: Circular
     <svg data-testid="circular-progress-test" className="flex rounded-full bg-gradient-to-r from-dark-blue to-desaturated-blue drop-shadow-primary" width="100%" height="100%">
       <g transform={`rotate(-90 ${'100 100'})`} fill="black">
         <ProgressCircle data-testid="progress-circle-lower" colour="lightgrey" percentage={percentage} />
-        <circle r={185.5} cx={-5} fill="#161932" transform="scale(1, 1) translate(0, 205)"></circle>
+        <circle r={183.5} cx={X_AXIS} fill="#161932" transform={TRANSFORM}></circle>
         <ProgressCircle data-testid="progress-circle-upper" colour={colour} percentage={pct} />
       </g>
       <RenderTimerText minutes={minutes} seconds={seconds} />
