@@ -2,11 +2,11 @@
  * @jest-environment jsdom
  */
 import {
-  CircularProgress,
   ProgressCircle,
+  CircularTimer,
   RenderTimerText,
   StringToTextElement,
-} from '@/src/components/circular-progress';
+} from '@/src/components/pomodoro/circular-progress';
 import { render, screen } from '@testing-library/react';
 
 describe('ProgressCircle', () => {
@@ -30,7 +30,7 @@ describe('ProgressCircle', () => {
     expect(progressCircle).toHaveAttribute('stroke', testColour);
 
     // test that the progress circle has the correct percentage
-    const r = 197.5;
+    const r = 163.5;
     const circ = 2 * Math.PI * r;
     const strokePercentage = ((100 - +testPercentage) * circ) / 100;
     const strokePercentageToString = strokePercentage.toString();
@@ -98,23 +98,23 @@ describe('RenderTimerText', () => {
 
     // test that the timer text component has the correct third child
     const thirdChild = timerText.children[2];
-    expect(thirdChild).toHaveAttribute('x', '194.17');
-    expect(thirdChild).toHaveAttribute('y', '226.66');
+    expect(thirdChild).toHaveAttribute('x', '191.17');
+    expect(thirdChild).toHaveAttribute('y', '238.66');
     expect(thirdChild).toHaveTextContent(':');
 
     // test that the timer text component has the correct fourth child
     const fourthChild = timerText.children[3];
-    expect(fourthChild).toHaveAttribute('x', '60%');
+    expect(fourthChild).toHaveAttribute('x', '59%');
     expect(fourthChild).toHaveTextContent(testSecondsToString[0]);
 
     // test that the timer text component has the correct fifth child
     const fifthChild = timerText.children[4];
-    expect(fifthChild).toHaveAttribute('x', '73%');
+    expect(fifthChild).toHaveAttribute('x', '72%');
     expect(fifthChild).toHaveTextContent(testSecondsToString[1]);
   });
 });
 
-describe('CircularProgress', () => {
+describe('ProgressCircle', () => {
   const testColour = 'blue';
   const testPercentage = 50;
   const testMinutes = 10;
@@ -124,7 +124,7 @@ describe('CircularProgress', () => {
 
   test('renders the circular progress component', () => {
     render(
-      <CircularProgress
+      <CircularTimer
         colour={testColour}
         percentage={testPercentage}
         minutes={testMinutesToString}
@@ -137,7 +137,7 @@ describe('CircularProgress', () => {
 
   test('renders progress circle component', () => {
     render(
-      <CircularProgress
+      <CircularTimer
         colour={testColour}
         percentage={testPercentage}
         minutes={testMinutesToString}
@@ -151,7 +151,7 @@ describe('CircularProgress', () => {
 
   test('renders timer text component', () => {
     render(
-      <CircularProgress
+      <CircularTimer
         colour={testColour}
         percentage={testPercentage}
         minutes={testMinutesToString}
@@ -164,7 +164,7 @@ describe('CircularProgress', () => {
 
   test('handles invalid percentage values correctly', () => {
     render(
-      <CircularProgress
+      <CircularTimer
         colour="blue"
         percentage={-testPercentage}
         minutes={testMinutesToString}

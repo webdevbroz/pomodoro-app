@@ -1,11 +1,11 @@
 'use client';
 
 // This is a client component 👈🏽
-import { useEffect, useRef, useState } from 'react';
-import { CircularProgress } from './circular-progress';
-import { Button } from './ui/button';
+import { ReactElement, useEffect, useRef, useState } from 'react';
+import { Button } from '../ui/button';
+import { CircularTimer } from './circular-progress';
 
-export default function PomodoroTimer() {
+export default function PomodoroTimer(): ReactElement {
   const [timeRemaining, setTimeRemaining] = useState<number>(1500);
   const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
   const [isFocusTime, setIsFocusTime] = useState<boolean>(true);
@@ -17,7 +17,7 @@ export default function PomodoroTimer() {
   const breakTimePercentage = (timeRemaining / 300) * 100;
   const percentage = isFocusTime ? focusTimePercentage : breakTimePercentage;
 
-  function startTimer() {
+  function startTimer(): () => void {
     intervalId.current = window.setInterval(
       () => setTimeRemaining((currentTimeRemaining) => currentTimeRemaining - 1),
       1000
@@ -31,7 +31,7 @@ export default function PomodoroTimer() {
     };
   }
 
-  function pauseTimer() {
+  function pauseTimer(): void {
     if (intervalId.current !== null) {
       clearInterval(intervalId.current);
     }
@@ -58,29 +58,27 @@ export default function PomodoroTimer() {
     }
   }, [timeRemaining, isFocusTime]);
 
+  const TimerButton = (): ReactElement => {
+    const pauseOrStartOnClick: () => void = isTimerActive ? pauseTimer : startTimer;
+    const pauseOrStartText: string = isTimerActive ? 'PAUSE' : 'START';
+    return (
+      <div className="absolute top-[65%] flex items-center justify-center">
+        <Button
+          variant="ghost-peach"
+          className="pr-0 font-bold tracking-[1em] text-on-dark-background"
+          onClick={pauseOrStartOnClick}
+        >
+          {pauseOrStartText}
+        </Button>
+      </div>
+    );
+  };
+
   return (
-    <div className="h-[410px] w-[410px]">
-      <div className="relative flex flex-col items-center justify-center rounded-full bg-primary-dark">
-        <CircularProgress percentage={percentage} colour="#f87070" minutes={minutes} seconds={seconds} />
-        <div className="absolute inset-x-[205] top-[275px] flex flex-col gap-1">
-          {isTimerActive ? (
-            <Button
-              variant="ghost"
-              className="pr-0 font-light tracking-[1em] text-on-dark-background hover:bg-primary-dark"
-              onClick={pauseTimer}
-            >
-              PAUSE
-            </Button>
-          ) : (
-            <Button
-              variant="ghost"
-              className="pr-0 font-light tracking-[1em] text-on-dark-background hover:bg-primary-dark"
-              onClick={startTimer}
-            >
-              START
-            </Button>
-          )}
-        </div>
+    <div className="h-[300px] w-[300px] md:h-[410px] md:w-[410px]">
+      <div className="relative flex h-[100%] flex-col items-center justify-center rounded-full bg-primary-dark">
+        <CircularTimer percentage={percentage} colour="#f87070" minutes={minutes} seconds={seconds} />
+        <TimerButton />
       </div>
     </div>
   );

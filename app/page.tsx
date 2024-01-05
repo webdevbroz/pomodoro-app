@@ -1,5 +1,5 @@
-import Logo from './src/components/Logo';
-import PomodoroTimer from './src/components/pomodoro-timer';
+import Logo from './src/components/logo';
+import PomodoroTimer from './src/components/pomodoro/pomodoro-timer';
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
         <Logo />
       </div>
       <div className="h-32 w-full border-4 border-white"></div>
-      <div className="h-112 w-full flex justify-center">
+      <div className="flex h-112 w-full items-center justify-center">
         <PomodoroTimer />
       </div>
       <div className="h-32 w-full border-4 border-white"></div>
