@@ -1,6 +1,6 @@
+import '@/app/styles/globals.css';
 import type { Metadata } from 'next';
-import { kumbh, roboto, space } from '@/lib/fonts';
-import '@/styles/globals.css';
+import { kumbh, roboto, space } from '../lib/fonts';
 
 export const metadata: Metadata = {
   title: 'Pomodoro app',
