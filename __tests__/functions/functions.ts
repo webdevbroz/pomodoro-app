@@ -1,4 +1,4 @@
-import { cleanPercentage } from '@/src/components/pomodoro/circular-progress';
+import { cleanPercentage } from '@/components/pomodoro/circular-progress';
 
 describe('cleanPercentage', () => {
   it('should return a number if the input is a within the values of 0-100', () => {

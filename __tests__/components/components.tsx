@@ -2,11 +2,11 @@
  * @jest-environment jsdom
  */
 import {
-  ProgressCircle,
   CircularTimer,
+  ProgressCircle,
   RenderTimerText,
   StringToTextElement,
-} from '@/src/components/pomodoro/circular-progress';
+} from '@/components/pomodoro/circular-progress';
 import { render, screen } from '@testing-library/react';
 
 describe('ProgressCircle', () => {

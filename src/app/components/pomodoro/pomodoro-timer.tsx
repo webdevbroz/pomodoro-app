@@ -2,7 +2,7 @@
 
 // This is a client component 👈🏽
 import { ReactElement, useEffect, useRef, useState } from 'react';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import { CircularTimer } from './circular-progress';
 
 export default function PomodoroTimer(): ReactElement {
