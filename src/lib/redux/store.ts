@@ -1,13 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
+import {
+  useDispatch as useReduxDispatch,
+  useSelector as useReduxSelector,
+  type TypedUseSelectorHook,
+} from 'react-redux';
 
-export const makeStore = () => {
-  return configureStore({
-    reducer: {},
-  })
-}
+export const reduxStore = configureStore({
+  reducer: {},
+});
 
-// Infer the type of makeStore
-export type AppStore = ReturnType<typeof makeStore>
-// Infer the type of RootState and AppDispatch from the store itself (i.e. the return type of makeStore)
-export type RootState = ReturnType<AppStore['getState']>
-export type AppDispatch = AppStore['dispatch']
+export const useDispatch = () => useReduxDispatch<ReduxDispatch>();
+export const useSelector: TypedUseSelectorHook<ReduxState> = useReduxSelector;
+
+// Types
+export type ReduxStore = typeof reduxStore;
+export type ReduxState = ReturnType<typeof reduxStore.getState>;
+export type ReduxDispatch = typeof reduxStore.dispatch;
