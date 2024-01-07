@@ -4,9 +4,10 @@ import {
   useSelector as useReduxSelector,
   type TypedUseSelectorHook,
 } from 'react-redux';
+import { reducer } from './slices/pomodoroSettingsSlice';
 
 export const reduxStore = configureStore({
-  reducer: {},
+  reducer,
 });
 
 export const useDispatch = () => useReduxDispatch<ReduxDispatch>();
