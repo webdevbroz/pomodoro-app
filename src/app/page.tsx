@@ -8,7 +8,7 @@ export default function Home() {
       <div className=" flex h-32 w-full items-center">
         <Logo />
       </div>
-      <div className=" flex h-32 w-full items-center justify-center border-4 border-white">
+      <div className=" flex h-32 w-full items-center justify-center">
         <TimerTransition />
       </div>
       <div className="flex h-112 w-full items-center justify-center">
