@@ -1,6 +1,6 @@
 import Logo from '../components/logo';
 import PomodoroTimer from '@/components/pomodoro/pomodoro-timer';
-import TimerTransition from '@/components/timer-transition';
+import PomodoroStatus from '@/components/pomodoro-status';
 
 export default function Home() {
   return (
@@ -9,7 +9,7 @@ export default function Home() {
         <Logo />
       </div>
       <div className=" flex h-32 w-full items-center justify-center">
-        <TimerTransition />
+        <PomodoroStatus />
       </div>
       <div className="flex h-112 w-full items-center justify-center">
         <PomodoroTimer />
