@@ -4,7 +4,7 @@ import {
   useSelector as useReduxSelector,
   type TypedUseSelectorHook,
 } from 'react-redux';
-import { reducer } from './slices/pomodoroSettingsSlice';
+import { reducer } from './rootReducer';
 
 export const reduxStore = configureStore({
   reducer,
