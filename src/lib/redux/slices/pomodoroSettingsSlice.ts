@@ -35,6 +35,13 @@ export const pomodoroSettingsSlice = createSlice({
     setColour: (state, action: PayloadAction<string>) => {
       state.colour = action.payload;
     },
+    updateAllSettings: (state, action: PayloadAction<PomodoroSettingsSliceState>) => {
+      state.pomodoro = action.payload.pomodoro;
+      state.shortBreakTime = action.payload.shortBreakTime;
+      state.longBreakTime = action.payload.longBreakTime;
+      state.font = action.payload.font;
+      state.colour = action.payload.colour;
+    }
   },
 });
 
