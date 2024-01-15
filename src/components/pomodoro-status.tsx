@@ -1,13 +1,15 @@
 'use client';
 
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 import { Label } from './ui/label';
 import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import { PomodoroStatus } from '@/lib/redux/slices/pomodoroStatusSlice';
 import { pomodoroStatusSlice } from '@/lib/redux/slices/pomodoroStatusSlice';
+import { useSelector, useDispatch, ReduxState } from '@/lib/redux/store';
 
 export default function PomodoroStatus(): ReactElement {
-  const [status, setstatus] = useState<PomodoroStatus>('pomodoro');
+  const dispatch = useDispatch()
+  const { status } = useSelector((state: ReduxState) => state.pomodoroStatus)
 
   const RadioItems = ({ status }: { status: PomodoroStatus }): ReactElement => {
     function setstatusStyles<T extends PomodoroStatus>(status: T, value: T): string {
@@ -59,7 +61,7 @@ export default function PomodoroStatus(): ReactElement {
   return (
     <div className="z-10 flex h-[3.938rem] w-[20.438rem] items-center justify-center rounded-full bg-primary-dark md:w-[23.313rem]">
       <RadioGroup
-        onValueChange={(value: PomodoroStatus) => setstatus(value)}
+        onValueChange={(value: PomodoroStatus) => dispatch(pomodoroStatusSlice.actions.selectedTimer(value))}
         className="flex w-full justify-center gap-0"
         defaultValue="pomodoro"
       >
