@@ -3,9 +3,13 @@
 // This is a client component 👈🏽
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { ReduxState, useSelector } from '@/lib/redux/store';
 import { CircularTimer } from './circular-progress';
 
 export default function PomodoroTimer(): ReactElement {
+  const { status } = useSelector((state: ReduxState) => state.pomodoroStatus);
+
+  // const [pomodoroStatus, setPomodoroStatus] = useState<string>(status)
   const [timeRemaining, setTimeRemaining] = useState<number>(1500);
   const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
   const [isFocusTime, setIsFocusTime] = useState<boolean>(true);
@@ -14,8 +18,19 @@ export default function PomodoroTimer(): ReactElement {
   const minutes = String(Math.floor(timeRemaining / 60)).padStart(2, '0');
   const seconds = String(timeRemaining % 60).padStart(2, '0'); // Pad the seconds with '0' to ensure it's always two digits
   const focusTimePercentage = (timeRemaining / 1500) * 100;
-  const breakTimePercentage = (timeRemaining / 300) * 100;
-  const percentage = isFocusTime ? focusTimePercentage : breakTimePercentage;
+  const shortBreakTimePercentage = (timeRemaining / 300) * 100;
+  const longBreakTimePercentage = (timeRemaining / 900) * 100;
+
+  // TODO fix progress circle not updating correctly
+  function percentage(isFocusTime: boolean) {
+    if (isFocusTime) {
+      return focusTimePercentage;
+    } else if (!isFocusTime && status === 'short') {
+      return shortBreakTimePercentage;
+    } else {
+      return longBreakTimePercentage;
+    }
+  }
 
   function startTimer(): () => void {
     intervalId.current = window.setInterval(
@@ -39,6 +54,16 @@ export default function PomodoroTimer(): ReactElement {
     setTimeRemaining(timeRemaining);
     setIsTimerActive(false);
   }
+
+  useEffect(() => {
+    if (status === 'pomodoro') {
+      setTimeRemaining(1500);
+    } else if (status === 'short') {
+      setTimeRemaining(300);
+    } else if (status === 'long') {
+      setTimeRemaining(900);
+    }
+  }, [status]);
 
   useEffect(() => {
     if (timeRemaining === 0) {
@@ -73,11 +98,10 @@ export default function PomodoroTimer(): ReactElement {
       </div>
     );
   };
-
   return (
     <div className="h-[300px] w-[300px] md:h-[410px] md:w-[410px]">
       <div className="relative flex h-[100%] flex-col items-center justify-center rounded-full bg-primary-dark">
-        <CircularTimer percentage={percentage} colour="#f87070" minutes={minutes} seconds={seconds} />
+        <CircularTimer percentage={percentage(isFocusTime)} colour="#f87070" minutes={minutes} seconds={seconds} />
         <TimerButton />
       </div>
     </div>
