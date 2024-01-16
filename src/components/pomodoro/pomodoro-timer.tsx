@@ -3,6 +3,7 @@
 // This is a client component 👈🏽
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { useSelector } from '@/lib/redux/store';
 import { CircularTimer } from './circular-progress';
 
 export default function PomodoroTimer(): ReactElement {
@@ -16,6 +17,8 @@ export default function PomodoroTimer(): ReactElement {
   const focusTimePercentage = (timeRemaining / 1500) * 100;
   const breakTimePercentage = (timeRemaining / 300) * 100;
   const percentage = isFocusTime ? focusTimePercentage : breakTimePercentage;
+
+  const getStore = useSelector((state) => state.pomodoroSettings);
 
   function startTimer(): () => void {
     intervalId.current = window.setInterval(
@@ -77,7 +80,7 @@ export default function PomodoroTimer(): ReactElement {
   return (
     <div className="h-[300px] w-[300px] md:h-[410px] md:w-[410px]">
       <div className="relative flex h-[100%] flex-col items-center justify-center rounded-full bg-primary-dark">
-        <CircularTimer percentage={percentage} colour="#f87070" minutes={minutes} seconds={seconds} />
+        <CircularTimer percentage={percentage} colour={getStore.colour} minutes={minutes} seconds={seconds} />
         <TimerButton />
       </div>
     </div>
