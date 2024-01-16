@@ -14,26 +14,34 @@ export default function PomodoroColourSettings({ onColourChange }: PomodoroColou
     setSelectedColourValue(value);
     onColourChange(value);
   };
+
   return (
-    <RadioGroup className="flex justify-center" onValueChange={handleValueChange}>
-      <RadioGroupItem
-        className="dark:bg-secondary-peach h-[40px] w-[40px] ring-offset-red-950"
-        value="#f87070"
-        id="peach"
-        checked={selectedColourValue === Colours.SecondaryPeach}
-      />
-      <RadioGroupItem
-        className="dark:bg-secondary-aqua h-[40px] w-[40px]"
-        value="#70f3f8"
-        id="aqua"
-        checked={selectedColourValue === Colours.secondaryAqua}
-      />
-      <RadioGroupItem
-        className="dark:bg-secondary-purple h-[40px] w-[40px]"
-        value="#d881f8"
-        id="purple"
-        checked={selectedColourValue === Colours.secondaryPurple}
-      />
-    </RadioGroup>
+    <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
+      <Label className="text-center font-extrabold uppercase tracking-[0.4em]">Colour</Label>
+      <RadioGroup
+        className="flex justify-center"
+        value={selectedColourValue}
+        onValueChange={(value) => handleValueChange(value)}
+      >
+        <RadioGroupItem
+          className="h-[40px] w-[40px] ring-offset-red-950 dark:bg-secondary-peach"
+          value="#f87070"
+          id="peach"
+          checked={selectedColourValue === Colours.SecondaryPeach}
+        />
+        <RadioGroupItem
+          className="h-[40px] w-[40px] dark:bg-secondary-aqua"
+          value="#70f3f8"
+          id="aqua"
+          checked={selectedColourValue === Colours.SecondaryAqua}
+        />
+        <RadioGroupItem
+          className="h-[40px] w-[40px] dark:bg-secondary-purple"
+          value="#d881f8"
+          id="purple"
+          checked={selectedColourValue === Colours.SecondaryPurple}
+        />
+      </RadioGroup>
+    </div>
   );
 }
