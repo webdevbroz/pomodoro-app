@@ -11,8 +11,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { useSelector, useDispatch } from 'react-redux';
 import { pomodoroSettingsSlice } from '@/lib/redux/slices/pomodoroSettingsSlice';
+import { useDispatch } from '@/lib/redux/store';
 
 export default function PomodoroSettings(): ReactElement {
   const dispatch = useDispatch();
