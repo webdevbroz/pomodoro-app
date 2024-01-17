@@ -3,26 +3,31 @@
 // This is a client component 👈🏽
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ReduxState, useSelector } from '@/lib/redux/store';
+import { pomodoroStatusSlice } from '@/lib/redux/slices/pomodoroStatusSlice';
+import { ReduxState, useDispatch, useSelector } from '@/lib/redux/store';
 import { CircularTimer } from './circular-progress';
 
 export default function PomodoroTimer(): ReactElement {
   const { status } = useSelector((state: ReduxState) => state.pomodoroStatus);
+  const dispatch = useDispatch();
 
-  // const [pomodoroStatus, setPomodoroStatus] = useState<string>(status)
-  const [timeRemaining, setTimeRemaining] = useState<number>(1500);
+  const pomodoroTime = 1500;
+  const shortBreakTime = 300;
+  const longBreakTime = 900;
+
+  const [pomodoroCount, setPomodoroCount] = useState<number>(1);
+  const [timeRemaining, setTimeRemaining] = useState<number>(pomodoroTime);
   const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
   const [isFocusTime, setIsFocusTime] = useState<boolean>(true);
   const intervalId = useRef<number | null>(null);
 
   const minutes = String(Math.floor(timeRemaining / 60)).padStart(2, '0');
   const seconds = String(timeRemaining % 60).padStart(2, '0'); // Pad the seconds with '0' to ensure it's always two digits
-  const focusTimePercentage = (timeRemaining / 1500) * 100;
-  const shortBreakTimePercentage = (timeRemaining / 300) * 100;
-  const longBreakTimePercentage = (timeRemaining / 900) * 100;
+  const focusTimePercentage = (timeRemaining / pomodoroTime) * 100;
+  const shortBreakTimePercentage = (timeRemaining / shortBreakTime) * 100;
+  const longBreakTimePercentage = (timeRemaining / longBreakTime) * 100;
 
-  // TODO fix progress circle not updating correctly
-  function percentage(isFocusTime: boolean) {
+  function statusPercentage(isFocusTime: boolean) {
     if (isFocusTime) {
       return focusTimePercentage;
     } else if (!isFocusTime && status === 'short') {
@@ -53,15 +58,22 @@ export default function PomodoroTimer(): ReactElement {
     // clearInterval(intervalId.current);
     setTimeRemaining(timeRemaining);
     setIsTimerActive(false);
+    if (status !== 'pomodoro') {
+      setIsFocusTime(false);
+    }
   }
 
   useEffect(() => {
+    pauseTimer();
     if (status === 'pomodoro') {
-      setTimeRemaining(1500);
+      setTimeRemaining(pomodoroTime);
+      setIsFocusTime(true);
     } else if (status === 'short') {
-      setTimeRemaining(300);
+      setTimeRemaining(shortBreakTime);
+      setIsFocusTime(false);
     } else if (status === 'long') {
-      setTimeRemaining(900);
+      setTimeRemaining(longBreakTime);
+      setIsFocusTime(false);
     }
   }, [status]);
 
@@ -72,16 +84,24 @@ export default function PomodoroTimer(): ReactElement {
       }
       // clearInterval(intervalId.current);
       intervalId.current = null;
-      if (isFocusTime) {
+      if (isFocusTime && pomodoroCount == 4) {
+        dispatch(pomodoroStatusSlice.actions.selectedTimer('long'));
         setIsFocusTime(false);
-        setTimeRemaining(300);
+        setTimeRemaining(longBreakTime);
+        setPomodoroCount(0);
+      } else if (isFocusTime) {
+        dispatch(pomodoroStatusSlice.actions.selectedTimer('short'));
+        setIsFocusTime(false);
+        setTimeRemaining(shortBreakTime);
       } else {
+        dispatch(pomodoroStatusSlice.actions.selectedTimer('pomodoro'));
         setIsFocusTime(true);
-        setTimeRemaining(1500);
+        setTimeRemaining(pomodoroTime);
+        setPomodoroCount((prev) => prev + 1);
       }
       setIsTimerActive(false);
     }
-  }, [timeRemaining, isFocusTime]);
+  }, [timeRemaining, isFocusTime, dispatch]);
 
   const TimerButton = (): ReactElement => {
     const pauseOrStartOnClick: () => void = isTimerActive ? pauseTimer : startTimer;
@@ -101,7 +121,12 @@ export default function PomodoroTimer(): ReactElement {
   return (
     <div className="h-[300px] w-[300px] md:h-[410px] md:w-[410px]">
       <div className="relative flex h-[100%] flex-col items-center justify-center rounded-full bg-primary-dark">
-        <CircularTimer percentage={percentage(isFocusTime)} colour="#f87070" minutes={minutes} seconds={seconds} />
+        <CircularTimer
+          percentage={statusPercentage(isFocusTime)}
+          colour="#f87070"
+          minutes={minutes}
+          seconds={seconds}
+        />
         <TimerButton />
       </div>
     </div>
