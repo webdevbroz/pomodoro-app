@@ -18,45 +18,27 @@ export default function PomodoroSettings(): ReactElement {
   const dispatch = useDispatch();
   const getStore = useSelector((state) => state.pomodoroSettings);
 
-  const [selectedPomodoro, setSelectedPomodoro] = useState<number>(getStore.pomodoro);
-  const [selectedShortBreakTime, setSelectedShortBreakTime] = useState<number>(getStore.shortBreakTime);
-  const [selectedLongBreakTime, setSelectedLongBreakTime] = useState<number>(getStore.longBreakTime);
   const [selectedFont, setSelectedFont] = useState<string>(getStore.font);
   const [selectedColour, setSelectedColour] = useState<string>(getStore.colour);
 
   console.log(getStore);
 
-  // const handlePomodoroChange = (pomodoro: string) => {
-  //   setSelectedPomodoro(pomodoro);
-  // }
+  const handleFontChange = (font: string) => {
+    setSelectedFont(font);
+  }
 
-  // const handleLongBreakChange = (longBreakTime: string) => {
-  //   setSelectedLongBreak(longBreak);
-  // }
-
-  // const handleShortBreakChange = (shortBreakTime: string) => {
-  //   setSelectedShortBreak(shortBreakTime);
-  // }
-
-  // const handleFontChange = (font: string) => {
-  //   setSelectedFont(font);
-  // }
   const handleColourChange = (colour: string) => {
     setSelectedColour(colour);
-  }
+  };
 
   const handleApplyNewSettings = () => {
     const settings = {
-      pomodoro: selectedPomodoro,
-      shortBreakTime: selectedShortBreakTime,
-      longBreakTime: selectedLongBreakTime,
       font: selectedFont,
       colour: selectedColour,
-    }
+    };
     dispatch(pomodoroSettingsSlice.actions.updateAllSettings(settings));
     // console.log(settings);
-  }
-
+  };
 
   console.log(selectedColour);
   return (

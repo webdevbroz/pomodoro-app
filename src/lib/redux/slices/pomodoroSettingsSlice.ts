@@ -2,17 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Colours } from '@/lib/colours';
 
 interface PomodoroSettingsSliceState {
-  pomodoro: number;
-  shortBreakTime: number;
-  longBreakTime: number;
   font: string;
   colour: string;
 }
 
 const InitialSettingsState: PomodoroSettingsSliceState = {
-  pomodoro: 25,
-  shortBreakTime: 5,
-  longBreakTime: 15,
   font: 'kumbh-sans',
   colour: Colours.SecondaryPeach,
 };
