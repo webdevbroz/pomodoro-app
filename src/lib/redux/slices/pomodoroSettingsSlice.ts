@@ -7,7 +7,7 @@ interface PomodoroSettingsSliceState {
 }
 
 const InitialSettingsState: PomodoroSettingsSliceState = {
-  font: 'kumbh-sans',
+  font: 'font-kumbh',
   colour: Colours.SecondaryPeach,
 };
 
