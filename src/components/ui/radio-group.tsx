@@ -3,6 +3,14 @@ import { cn } from '@/lib/utils';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { Circle } from 'lucide-react';
 
+type RadioItemVariant = 'tick' | 'circle' | 'text';
+
+interface RadioGroupProps {
+  checked?: boolean;
+  variant?: RadioItemVariant;
+  text?: string;
+}
+
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
@@ -13,8 +21,26 @@ RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & { checked?: boolean }
->(({ className, checked, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & RadioGroupProps
+>(({ className, checked, variant, text, ...props }, ref) => {
+
+  const renderIndicator = () => {
+    switch (variant) {
+      case 'tick':
+        return <div className="font-bold text-black">✓</div>
+      case 'text':
+        if (text) {
+          return (
+            <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full font-bold text-on-dark-background dark:bg-app-background">
+              {text}
+            </div>
+          );
+        }
+      default:
+        return <Circle className="h-2.5 w-2.5 fill-current text-current" />
+    }
+  }
+
   return (
     <RadioGroupPrimitive.Item
       ref={ref}
@@ -25,12 +51,11 @@ const RadioGroupItem = React.forwardRef<
       {...props}
     >
       <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-        {checked ? (
-          <div className="text-black font-bold">✓</div>
-        ) : (
-          <Circle className="h-2.5 w-2.5 fill-current text-current" />
-        )}
+        {renderIndicator()}
       </RadioGroupPrimitive.Indicator>
+      {text && (
+        <div className="flex items-center justify-center text-black">{checked ? null : text}</div> // Render text next to the radio item
+      )}
     </RadioGroupPrimitive.Item>
   );
 });
