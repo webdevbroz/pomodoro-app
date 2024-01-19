@@ -2,13 +2,16 @@ import { ReactElement, useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Colours } from '@/lib/colours';
+import { useSelector } from '@/lib/redux/store';
 
 interface PomodoroColourSettingsProps {
   onColourChange: (colour: string) => void;
 }
 
 export default function PomodoroColourSettings({ onColourChange }: PomodoroColourSettingsProps): ReactElement {
-  const [selectedColourValue, setSelectedColourValue] = useState<string>(Colours.SecondaryPeach);
+  const getStore = useSelector((state) => state.pomodoroSettings);
+
+  const [selectedColourValue, setSelectedColourValue] = useState<string>(getStore.colour);
 
   const handleValueChange = (value: string) => {
     setSelectedColourValue(value);
@@ -24,21 +27,24 @@ export default function PomodoroColourSettings({ onColourChange }: PomodoroColou
         onValueChange={(value) => handleValueChange(value)}
       >
         <RadioGroupItem
-          className="h-[40px] w-[40px] ring-offset-red-950 dark:bg-secondary-peach"
+          className="h-[40px] w-[40px] dark:bg-secondary-peach"
           value="#f87070"
           id="peach"
+          variant='tick'
           checked={selectedColourValue === Colours.SecondaryPeach}
         />
         <RadioGroupItem
           className="h-[40px] w-[40px] dark:bg-secondary-aqua"
           value="#70f3f8"
           id="aqua"
+          variant='tick'
           checked={selectedColourValue === Colours.SecondaryAqua}
         />
         <RadioGroupItem
           className="h-[40px] w-[40px] dark:bg-secondary-purple"
           value="#d881f8"
           id="purple"
+          variant='tick'
           checked={selectedColourValue === Colours.SecondaryPurple}
         />
       </RadioGroup>
