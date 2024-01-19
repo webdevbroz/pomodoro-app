@@ -5,8 +5,10 @@ import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useSelector } from '@/lib/redux/store';
 import { CircularTimer } from './circular-progress';
+import { Colours } from '@/lib/colours';
 
 export default function PomodoroTimer(): ReactElement {
+  const { colour } = useSelector((state) => state.pomodoroSettings);
   const [timeRemaining, setTimeRemaining] = useState<number>(1500);
   const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
   const [isFocusTime, setIsFocusTime] = useState<boolean>(true);
@@ -17,8 +19,6 @@ export default function PomodoroTimer(): ReactElement {
   const focusTimePercentage = (timeRemaining / 1500) * 100;
   const breakTimePercentage = (timeRemaining / 300) * 100;
   const percentage = isFocusTime ? focusTimePercentage : breakTimePercentage;
-
-  const getStore = useSelector((state) => state.pomodoroSettings);
 
   function startTimer(): () => void {
     intervalId.current = window.setInterval(
@@ -61,13 +61,23 @@ export default function PomodoroTimer(): ReactElement {
     }
   }, [timeRemaining, isFocusTime]);
 
+function buttonTextColourOnHover(colour: string) {
+  if (colour === Colours.SecondaryPeach) {
+    return 'ghost-peach'
+  } else if (colour === Colours.SecondaryAqua) {
+    return 'ghost-aqua'
+  } else {
+    return 'ghost-purple'
+  }
+}
+
   const TimerButton = (): ReactElement => {
     const pauseOrStartOnClick: () => void = isTimerActive ? pauseTimer : startTimer;
     const pauseOrStartText: string = isTimerActive ? 'PAUSE' : 'START';
     return (
       <div className="absolute top-[65%] flex items-center justify-center">
         <Button
-          variant="ghost-peach"
+          variant={buttonTextColourOnHover(colour)}
           className="pr-0 font-bold tracking-[1em] text-on-dark-background"
           onClick={pauseOrStartOnClick}
         >
@@ -80,7 +90,7 @@ export default function PomodoroTimer(): ReactElement {
   return (
     <div className="h-[300px] w-[300px] md:h-[410px] md:w-[410px]">
       <div className="relative flex h-[100%] flex-col items-center justify-center rounded-full bg-primary-dark">
-        <CircularTimer percentage={percentage} colour={getStore.colour} minutes={minutes} seconds={seconds} />
+        <CircularTimer percentage={percentage} colour={colour} minutes={minutes} seconds={seconds} />
         <TimerButton />
       </div>
     </div>

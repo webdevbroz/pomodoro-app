@@ -3,12 +3,12 @@ import { cn } from '@/lib/utils';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { Circle } from 'lucide-react';
 
-type RadioItemVariant = 'tick' | 'circle' | 'text';
+type RadioItemVariant = 'colour' | 'font';
 
 interface RadioGroupProps {
-  checked?: boolean;
+  isSelected?: boolean;
   variant?: RadioItemVariant;
-  text?: string;
+  selectedText?: string;
 }
 
 const RadioGroup = React.forwardRef<
@@ -22,17 +22,17 @@ RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & RadioGroupProps
->(({ className, checked, variant, text, ...props }, ref) => {
+>(({ className, isSelected, variant, selectedText, ...props }, ref) => {
 
   const renderIndicator = () => {
     switch (variant) {
-      case 'tick':
+      case 'colour':
         return <div className="font-bold text-black">✓</div>
-      case 'text':
-        if (text) {
+      case 'font':
+        if (selectedText) {
           return (
             <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full font-bold text-on-dark-background dark:bg-app-background">
-              {text}
+              {selectedText}
             </div>
           );
         }
@@ -53,8 +53,8 @@ const RadioGroupItem = React.forwardRef<
       <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
         {renderIndicator()}
       </RadioGroupPrimitive.Indicator>
-      {text && (
-        <div className="flex items-center justify-center text-black">{checked ? null : text}</div> // Render text next to the radio item
+      {selectedText && (
+        <div className="flex items-center justify-center text-black">{isSelected ? null : selectedText}</div> // Render text next to the radio item
       )}
     </RadioGroupPrimitive.Item>
   );

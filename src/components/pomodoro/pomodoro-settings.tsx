@@ -2,13 +2,13 @@
 
 // This is a client component 👈🏽
 import { ReactElement, useState } from 'react';
+import Image from 'next/image'
 import PomodoroColourSettings from '@/components/pomodoro/pomodoro-colour-settings';
 import PomodoroFontSettings from '@/components/pomodoro/pomodoro-font-settings';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -18,13 +18,11 @@ import { useDispatch, useSelector } from '@/lib/redux/store';
 
 export default function PomodoroSettings(): ReactElement {
   const dispatch = useDispatch();
-  const getStore = useSelector((state) => state.pomodoroSettings);
+  const { colour, font } = useSelector((state) => state.pomodoroSettings);
 
-  const [selectedFont, setSelectedFont] = useState<string>(getStore.font);
-  const [selectedColour, setSelectedColour] = useState<string>(getStore.colour);
+  const [selectedFont, setSelectedFont] = useState<string>(font);
+  const [selectedColour, setSelectedColour] = useState<string>(colour);
   const [open, setOpen] = useState<boolean>(false);
-
-  console.log(getStore);
 
   const handleFontChange = (font: string) => {
     setSelectedFont(font);
@@ -43,19 +41,17 @@ export default function PomodoroSettings(): ReactElement {
     setOpen(false);
   };
 
-  console.log(selectedColour);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className="">
-        <img src="/icon-settings.svg" alt="settings" className="cursor-pointer" />
+        <Image src="/icon-settings.svg" width={28} height={28} alt="settings" className="cursor-pointer" />
       </DialogTrigger>
-      <DialogContent className="flex h-[575px] w-[327px]	flex-col justify-between md:h-[540px] md:w-[490px] dark:bg-settings-background">
+      <DialogContent className="flex h-[575px] w-[327px]	flex-col justify-between dark:bg-settings-background md:h-[540px] md:w-[490px]">
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
         </DialogHeader>
         <PomodoroColourSettings onColourChange={handleColourChange} />
         <PomodoroFontSettings onFontChange={handleFontChange} />
-        {/* this button rerenders each time PomodoroColorSettings onColourChange is executed */}
         <Button onClick={handleApplyNewSettings}>Apply</Button>
       </DialogContent>
     </Dialog>
