@@ -13,8 +13,7 @@ export default function Pomodoro() {
       <div className={`flex h-112 w-full items-center justify-center ${getStore.font}`}>
         <PomodoroTimer />
       </div>
-      {/* <button>Open Settings</button> */}
-      <div className="flex h-32 w-full justify-center border-4 border-white">
+      <div className="flex h-32 w-full justify-center">
         <PomodoroSettings />
       </div>
     </>
