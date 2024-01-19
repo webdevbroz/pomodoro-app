@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Colours } from '@/lib/colours';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface PomodoroSettingsSliceState {
   font: string;
@@ -24,10 +24,10 @@ export const pomodoroSettingsSlice = createSlice({
     updateAllSettings: (state, action: PayloadAction<PomodoroSettingsSliceState>) => {
       state.font = action.payload.font;
       state.colour = action.payload.colour;
-    }
+    },
   },
 });
 
 export const reducer = {
-  pomodoroSettings: pomodoroSettingsSlice.reducer
-}
+  pomodoroSettings: pomodoroSettingsSlice.reducer,
+};

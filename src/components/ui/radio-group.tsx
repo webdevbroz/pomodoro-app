@@ -23,11 +23,10 @@ const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & RadioGroupProps
 >(({ className, isSelected, variant, selectedText, ...props }, ref) => {
-
   const renderIndicator = () => {
     switch (variant) {
       case 'colour':
-        return <div className="font-bold text-black">✓</div>
+        return <div className="font-bold text-black">✓</div>;
       case 'font':
         if (selectedText) {
           return (
@@ -37,9 +36,9 @@ const RadioGroupItem = React.forwardRef<
           );
         }
       default:
-        return <Circle className="h-2.5 w-2.5 fill-current text-current" />
+        return <Circle className="h-2.5 w-2.5 fill-current text-current" />;
     }
-  }
+  };
 
   return (
     <RadioGroupPrimitive.Item

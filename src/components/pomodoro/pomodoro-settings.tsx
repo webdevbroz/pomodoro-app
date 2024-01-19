@@ -2,17 +2,11 @@
 
 // This is a client component 👈🏽
 import { ReactElement, useState } from 'react';
-import Image from 'next/image'
+import Image from 'next/image';
 import PomodoroColourSettings from '@/components/pomodoro/pomodoro-colour-settings';
 import PomodoroFontSettings from '@/components/pomodoro/pomodoro-font-settings';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { pomodoroSettingsSlice } from '@/lib/redux/slices/pomodoroSettingsSlice';
 import { useDispatch, useSelector } from '@/lib/redux/store';
 
@@ -26,7 +20,7 @@ export default function PomodoroSettings(): ReactElement {
 
   const handleFontChange = (font: string) => {
     setSelectedFont(font);
-  }
+  };
 
   const handleColourChange = (colour: string) => {
     setSelectedColour(colour);

@@ -30,21 +30,21 @@ export default function PomodoroColourSettings({ onColourChange }: PomodoroColou
           className="h-[40px] w-[40px] dark:bg-secondary-peach"
           value="#f87070"
           id="peach"
-          variant='colour'
+          variant="colour"
           isSelected={selectedColourValue === Colours.SecondaryPeach}
         />
         <RadioGroupItem
           className="h-[40px] w-[40px] dark:bg-secondary-aqua"
           value="#70f3f8"
           id="aqua"
-          variant='colour'
+          variant="colour"
           isSelected={selectedColourValue === Colours.SecondaryAqua}
         />
         <RadioGroupItem
           className="h-[40px] w-[40px] dark:bg-secondary-purple"
           value="#d881f8"
           id="purple"
-          variant='colour'
+          variant="colour"
           isSelected={selectedColourValue === Colours.SecondaryPurple}
         />
       </RadioGroup>

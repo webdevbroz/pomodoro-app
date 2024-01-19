@@ -1,8 +1,8 @@
 'use client';
 
 // This is a client component 👈🏽
-import PomodoroTimer from '@/components/pomodoro/pomodoro-timer';
 import PomodoroSettings from '@/components/pomodoro/pomodoro-settings';
+import PomodoroTimer from '@/components/pomodoro/pomodoro-timer';
 import { useSelector } from '@/lib/redux/store';
 
 export default function Pomodoro() {
