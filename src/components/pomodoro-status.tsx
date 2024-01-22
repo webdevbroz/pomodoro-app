@@ -6,14 +6,26 @@ import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import { PomodoroStatus } from '@/lib/redux/slices/pomodoroStatusSlice';
 import { pomodoroStatusSlice } from '@/lib/redux/slices/pomodoroStatusSlice';
 import { useSelector, useDispatch, ReduxState } from '@/lib/redux/store';
+import { Colours } from '@/lib/colours';
 
 export default function PomodoroStatus(): ReactElement {
   const dispatch = useDispatch()
   const { status } = useSelector((state: ReduxState) => state.pomodoroStatus)
+  const { colour } = useSelector((state: ReduxState) => state.pomodoroSettings)
 
   const RadioItems = ({ status }: { status: PomodoroStatus }): ReactElement => {
     function setstatusStyles<T extends PomodoroStatus>(status: T, value: T): string {
-      return status === value ? 'bg-secondary-peach' : 'text-gray-500 hover:text-on-dark-background';
+      return status === value ? setColour() : 'text-gray-500 hover:text-on-dark-background';
+    }
+
+    function setColour(): string {
+      switch(colour) {
+        case Colours.SecondaryAqua:
+          return 'bg-secondary-aqua'
+        case Colours.SecondaryPurple:
+          return 'bg-secondary-purple'
+      }
+      return 'bg-secondary-peach'
     }
 
     return (
