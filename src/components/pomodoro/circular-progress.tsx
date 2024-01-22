@@ -65,14 +65,14 @@ export const StringToTextElement = ({ text, xvalue }: { text: string; xvalue: nu
 };
 
 export const RenderTimerText = ({ minutes, seconds }: RenderTimerTextProps): ReactElement => {
-  const xLogic = 205 - 27.66 / 2;
+  const xLogic = 205;
   const yLogic = 205 + 33.66;
   return (
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text
     // xlogic and ylogic refers to the positioning of the semicolon.
     <g data-testid="render-timer-text-test">
       <StringToTextElement xvalue={27} text={minutes} />
-      <text className="fill-on-dark-background text-8xl font-bold" x={xLogic} y={yLogic}>
+      <text className="fill-on-dark-background text-8xl font-bold" textAnchor="middle" x={xLogic} y={yLogic}>
         :
       </text>
       <StringToTextElement xvalue={59} text={seconds} />

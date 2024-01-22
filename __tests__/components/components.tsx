@@ -98,7 +98,7 @@ describe('RenderTimerText', () => {
 
     // test that the timer text component has the correct third child
     const thirdChild = timerText.children[2];
-    expect(thirdChild).toHaveAttribute('x', '191.17');
+    expect(thirdChild).toHaveAttribute('x', '205');
     expect(thirdChild).toHaveAttribute('y', '238.66');
     expect(thirdChild).toHaveTextContent(':');
 

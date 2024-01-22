@@ -5,21 +5,23 @@ import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { pomodoroStatusSlice } from '@/lib/redux/slices/pomodoroStatusSlice';
 import { ReduxState, useDispatch, useSelector } from '@/lib/redux/store';
+import { Colours } from '@/lib/colours';
 import { CircularTimer } from './circular-progress';
 
-export default function PomodoroTimer(): ReactElement {
-  const { status } = useSelector((state: ReduxState) => state.pomodoroStatus);
-  const dispatch = useDispatch();
+  export default function PomodoroTimer(): ReactElement {
+    const { status } = useSelector((state: ReduxState) => state.pomodoroStatus);
+    const dispatch = useDispatch();
+    const { colour } = useSelector((state) => state.pomodoroSettings);
 
-  const pomodoroTime = 1500;
-  const shortBreakTime = 300;
-  const longBreakTime = 900;
+    const pomodoroTime = 1500;
+    const shortBreakTime = 300;
+    const longBreakTime = 900;
 
-  const [pomodoroCount, setPomodoroCount] = useState<number>(1);
-  const [timeRemaining, setTimeRemaining] = useState<number>(pomodoroTime);
-  const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
-  const [isFocusTime, setIsFocusTime] = useState<boolean>(true);
-  const intervalId = useRef<number | null>(null);
+    const intervalId = useRef<number | null>(null);
+    const [pomodoroCount, setPomodoroCount] = useState<number>(1);
+    const [timeRemaining, setTimeRemaining] = useState<number>(pomodoroTime);
+    const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
+    const [isFocusTime, setIsFocusTime] = useState<boolean>(true);
 
   const minutes = String(Math.floor(timeRemaining / 60)).padStart(2, '0');
   const seconds = String(timeRemaining % 60).padStart(2, '0'); // Pad the seconds with '0' to ensure it's always two digits
@@ -103,13 +105,23 @@ export default function PomodoroTimer(): ReactElement {
     }
   }, [timeRemaining, isFocusTime, dispatch]);
 
+  function buttonTextColourOnHover(colour: string) {
+    if (colour === Colours.SecondaryPeach) {
+      return 'ghost-peach';
+    } else if (colour === Colours.SecondaryAqua) {
+      return 'ghost-aqua';
+    } else {
+      return 'ghost-purple';
+    }
+  }
+
   const TimerButton = (): ReactElement => {
     const pauseOrStartOnClick: () => void = isTimerActive ? pauseTimer : startTimer;
     const pauseOrStartText: string = isTimerActive ? 'PAUSE' : 'START';
     return (
       <div className="absolute top-[65%] flex items-center justify-center">
         <Button
-          variant="ghost-peach"
+          variant={buttonTextColourOnHover(colour)}
           className="pr-0 font-bold tracking-[1em] text-on-dark-background"
           onClick={pauseOrStartOnClick}
         >
@@ -123,7 +135,7 @@ export default function PomodoroTimer(): ReactElement {
       <div className="relative flex h-[100%] flex-col items-center justify-center rounded-full bg-primary-dark">
         <CircularTimer
           percentage={statusPercentage(isFocusTime)}
-          colour="#f87070"
+          colour={colour}
           minutes={minutes}
           seconds={seconds}
         />
