@@ -27,7 +27,3 @@ export const pomodoroSettingsSlice = createSlice({
     },
   },
 });
-
-export const reducer = {
-  pomodoroSettings: pomodoroSettingsSlice.reducer,
-};
