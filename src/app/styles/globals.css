@@ -20,7 +20,6 @@
 
   body {
     background: var(--app-background);
-    font-family: var(--font-kumbh-sans);
     min-height: 100vh;
   }
 }
