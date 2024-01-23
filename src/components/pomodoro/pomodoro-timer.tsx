@@ -76,14 +76,14 @@ import { CircularTimer } from './circular-progress';
       setTimeRemaining(longBreakTime);
       setIsFocusTime(false);
     }
-  }, [status]);
+  }, [longBreakTime, pomodoroTime, shortBreakTime, status]);
 
   useEffect(() => {
     if (timeRemaining === 0) {
       if (intervalId.current !== null) {
         clearInterval(intervalId.current);
       }
-      // clearInterval(intervalId.current);
+
       intervalId.current = null;
       if (isFocusTime && pomodoroCount == 4) {
         dispatch(pomodoroStatusSlice.actions.selectedTimer('long'));
