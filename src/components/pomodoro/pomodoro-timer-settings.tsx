@@ -4,23 +4,39 @@ import { ReduxState, useSelector } from '@/lib/redux/store';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 
-interface PomodoroTimerSettingsProps {
-  onTimerChange: (timer: string) => void;
-}
-
-interface PomodoroTimerData {
+export interface PomodoroTimerData {
   pomodoro: number;
   shortBreak: number;
   longBreak: number;
 }
 
+interface PomodoroTimerSettingsProps {
+  onTimerChange: (updatedTimerData: PomodoroTimerData) => void;
+}
+
 export default function PomodoroTimerSettings({ onTimerChange }: PomodoroTimerSettingsProps) {
-  const { colour } = useSelector((state: ReduxState) => state.pomodoroSettings);
-  const [selectedTime, setSelectedTime] = useState<PomodoroTimerData>({ pomodoro: 25, shortBreak: 5, longBreak: 15 });
+  const { colour, time } = useSelector((state: ReduxState) => state.pomodoroSettings);
+  const [selectedTime, setSelectedTime] = useState<PomodoroTimerData>(time);
   const inputRules = {
     min: 5,
     max: 60,
-    step: 5
+    step: 5,
+  };
+
+  const updateTimeValues = (callback: (prevSelectedTime: PomodoroTimerData) => Partial<PomodoroTimerData>) => {
+    const updatedProperties = callback(selectedTime);
+
+    setSelectedTime((prevSelectedTime) => ({
+      ...prevSelectedTime,
+      ...updatedProperties,
+    }));
+
+    onTimerChange({ ...selectedTime, ...updatedProperties });
+  };
+
+  const handleTimeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    updateTimeValues(() => ({ [name]: value }));
   };
 
   function setRingOffsetColor(colour: string) {
@@ -33,18 +49,9 @@ export default function PomodoroTimerSettings({ onTimerChange }: PomodoroTimerSe
     return 'focus:border-secondary-peach';
   }
 
-  const handleTimeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-
-    setSelectedTime((prevSelectedTime) => ({
-      ...prevSelectedTime,
-      [name]: value,
-    }));
-  };
-
   return (
     <div className="flex flex-col gap-2">
-      <Label className=" pb-3 text-center text-xs font-bold uppercase tracking-[0.4em] md:self-start">
+      <Label className="pb-3 text-center text-xs font-bold uppercase tracking-[0.4em] md:self-start">
         Time (Minutes)
       </Label>
       <div className="flex flex-col items-center gap-2 md:flex-row">

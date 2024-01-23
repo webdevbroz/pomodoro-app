@@ -5,7 +5,7 @@ import { ReactElement, useState } from 'react';
 import Image from 'next/image';
 import PomodoroColourSettings from '@/components/pomodoro/pomodoro-colour-settings';
 import PomodoroFontSettings from '@/components/pomodoro/pomodoro-font-settings';
-import PomodoroTimerSettings from './pomodoro-timer-settings';
+import PomodoroTimerSettings, { PomodoroTimerData } from './pomodoro-timer-settings';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { pomodoroSettingsSlice } from '@/lib/redux/slices/pomodoroSettingsSlice';
@@ -13,10 +13,11 @@ import { useDispatch, useSelector } from '@/lib/redux/store';
 
 export default function PomodoroSettings(): ReactElement {
   const dispatch = useDispatch();
-  const { colour, font } = useSelector((state) => state.pomodoroSettings);
+  const { colour, font, time } = useSelector((state) => state.pomodoroSettings);
 
   const [selectedFont, setSelectedFont] = useState<string>(font);
   const [selectedColour, setSelectedColour] = useState<string>(colour);
+  const [selectedTime, setSelectedTime] = useState<PomodoroTimerData>(time);
   const [open, setOpen] = useState<boolean>(false);
 
   const handleFontChange = (font: string) => {
@@ -27,10 +28,15 @@ export default function PomodoroSettings(): ReactElement {
     setSelectedColour(colour);
   };
 
+  const handleTimeChange = (time: PomodoroTimerData) => {
+    setSelectedTime(time)
+  }
+
   const handleApplyNewSettings = () => {
     const settings = {
       font: selectedFont,
       colour: selectedColour,
+      time: selectedTime
     };
     dispatch(pomodoroSettingsSlice.actions.updateAllSettings(settings));
     setOpen(false);
@@ -45,7 +51,7 @@ export default function PomodoroSettings(): ReactElement {
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
         </DialogHeader>
-        <PomodoroTimerSettings />
+        <PomodoroTimerSettings onTimerChange={handleTimeChange} />
         <PomodoroColourSettings onColourChange={handleColourChange} />
         <PomodoroFontSettings onFontChange={handleFontChange} />
         <Button onClick={handleApplyNewSettings}>Apply</Button>
@@ -53,3 +59,51 @@ export default function PomodoroSettings(): ReactElement {
     </Dialog>
   );
 }
+
+
+// import React, { useState } from 'react';
+
+// interface PomodoroTimerData {
+//   minutes: number;
+//   seconds: number;
+// }
+
+// interface PomodoroTimerSettingsProps {
+//   onTimerChange: (updatedTimerData: PomodoroTimerData) => void;
+// }
+
+// const PomodoroTimerSettings: React.FC<PomodoroTimerSettingsProps> = ({ onTimerChange }) => {
+//   const [timerData, setTimerData] = useState<PomodoroTimerData>({ minutes: 25, seconds: 0 });
+
+//   const handleTimerChange = (callback: (prevSelectedTime: PomodoroTimerData) => Partial<PomodoroTimerData>) => {
+//     const updatedProperties = callback(timerData);
+//     setTimerData(prevTimerData => ({ ...prevTimerData, ...updatedProperties }));
+//     onTimerChange({ ...timerData, ...updatedProperties });
+//   };
+
+//   const handleMinutesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     const minutes = parseInt(event.target.value, 10) || 0;
+//     handleTimerChange(prevSelectedTime => ({ minutes }));
+//   };
+
+//   const handleSecondsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     const seconds = parseInt(event.target.value, 10) || 0;
+//     handleTimerChange(prevSelectedTime => ({ seconds }));
+//   };
+
+//   return (
+//     <div>
+//       <label>
+//         Minutes:
+//         <input type="number" value={timerData.minutes} onChange={handleMinutesChange} />
+//       </label>
+//       <br />
+//       <label>
+//         Seconds:
+//         <input type="number" value={timerData.seconds} onChange={handleSecondsChange} />
+//       </label>
+//     </div>
+//   );
+// };
+
+// export default PomodoroTimerSettings;

@@ -10,12 +10,12 @@ import { CircularTimer } from './circular-progress';
 
   export default function PomodoroTimer(): ReactElement {
     const { status } = useSelector((state: ReduxState) => state.pomodoroStatus);
-    const { colour } = useSelector((state: ReduxState) => state.pomodoroSettings);
+    const { colour, time } = useSelector((state: ReduxState) => state.pomodoroSettings);
     const dispatch = useDispatch();
 
-    const pomodoroTime = 1500;
-    const shortBreakTime = 300;
-    const longBreakTime = 900;
+    const pomodoroTime = time.pomodoro * 60;
+    const shortBreakTime = time.shortBreak * 60;
+    const longBreakTime = time.longBreak * 60;
 
     const intervalId = useRef<number | null>(null);
     const [pomodoroCount, setPomodoroCount] = useState<number>(1);
