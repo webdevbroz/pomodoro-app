@@ -110,8 +110,8 @@ import { setVariantAndColour } from '@/lib/utils';
     return (
       <div className="absolute top-[65%] flex items-center justify-center">
         <Button
-          className="pr-0 font-bold tracking-[1em] text-on-dark-background"
           variant={setVariantAndColour(colour)}
+          className="pr-0 font-bold tracking-[1em] text-white"
           onClick={pauseOrStartOnClick}
         >
           {pauseOrStartText}
