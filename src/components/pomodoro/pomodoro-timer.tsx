@@ -5,8 +5,8 @@ import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { pomodoroStatusSlice } from '@/lib/redux/slices/pomodoroStatusSlice';
 import { ReduxState, useDispatch, useSelector } from '@/lib/redux/store';
-import { Colours } from '@/lib/colours';
 import { CircularTimer } from './circular-progress';
+import { setVariantAndColour } from '@/lib/utils';
 
   export default function PomodoroTimer(): ReactElement {
     const { status } = useSelector((state: ReduxState) => state.pomodoroStatus);
@@ -104,24 +104,14 @@ import { CircularTimer } from './circular-progress';
     }
   }, [timeRemaining, isFocusTime, dispatch]);
 
-  function buttonTextColourOnHover(colour: string) {
-    if (colour === Colours.SecondaryPeach) {
-      return 'ghost-peach';
-    } else if (colour === Colours.SecondaryAqua) {
-      return 'ghost-aqua';
-    } else {
-      return 'ghost-purple';
-    }
-  }
-
   const TimerButton = (): ReactElement => {
     const pauseOrStartOnClick: () => void = isTimerActive ? pauseTimer : startTimer;
     const pauseOrStartText: string = isTimerActive ? 'PAUSE' : 'START';
     return (
       <div className="absolute top-[65%] flex items-center justify-center">
         <Button
-          variant={buttonTextColourOnHover(colour)}
           className="pr-0 font-bold tracking-[1em] text-on-dark-background"
+          variant={setVariantAndColour(colour)}
           onClick={pauseOrStartOnClick}
         >
           {pauseOrStartText}
