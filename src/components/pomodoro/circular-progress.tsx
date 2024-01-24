@@ -50,7 +50,7 @@ export const StringToTextElement = ({ text, xvalue }: { text: string; xvalue: nu
       {text.split('').map((char, index) => (
         <text
           data-testid={`strings-to-text-element-test-${index}`}
-          className="fill-on-dark-background text-8xl font-bold"
+          className="fill-gray-300 text-8xl font-bold"
           dominantBaseline="central"
           textAnchor="middle"
           key={index}
@@ -72,7 +72,7 @@ export const RenderTimerText = ({ minutes, seconds }: RenderTimerTextProps): Rea
     // xlogic and ylogic refers to the positioning of the semicolon.
     <g data-testid="render-timer-text-test">
       <StringToTextElement xvalue={27} text={minutes} />
-      <text className="fill-on-dark-background text-8xl font-bold" textAnchor="middle" x={xLogic} y={yLogic}>
+      <text className="fill-gray-300 text-8xl font-bold" textAnchor="middle" x={xLogic} y={yLogic}>
         :
       </text>
       <StringToTextElement xvalue={59} text={seconds} />

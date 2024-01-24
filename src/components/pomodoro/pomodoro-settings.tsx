@@ -40,7 +40,7 @@ export default function PomodoroSettings(): ReactElement {
       <DialogTrigger className="">
         <Image src="/icon-settings.svg" width={28} height={28} alt="settings" className="cursor-pointer" />
       </DialogTrigger>
-      <DialogContent className="flex h-[575px] w-[327px]	flex-col justify-between dark:bg-settings-background md:h-[540px] md:w-[490px]">
+      <DialogContent className="flex h-[575px] w-[327px]	flex-col justify-between dark:bg-white md:h-[540px] md:w-[490px]">
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
         </DialogHeader>

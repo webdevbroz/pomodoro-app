@@ -14,9 +14,6 @@ const config: Config = {
     extend: {
       colors: {
         'app-background': 'var(--app-background)',
-        'on-light-background': 'var(--on-light-background)',
-        'on-dark-background': 'var(--on-dark-background)',
-        'settings-background': 'var(--settings-background)',
         'primary-dark': 'var(--primary-dark)',
         'secondary-peach': 'var(--secondary-peach)',
         'secondary-aqua': 'var(--secondary-aqua)',
