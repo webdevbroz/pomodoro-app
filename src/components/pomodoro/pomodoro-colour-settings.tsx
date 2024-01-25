@@ -19,29 +19,29 @@ export default function PomodoroColourSettings({ onColourChange }: PomodoroColou
   };
 
   return (
-    <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
-      <Label className="text-center font-extrabold uppercase tracking-[0.4em]">Colour</Label>
+    <div className="mx-6 flex flex-col items-center justify-between gap-5 border-t border-gray-200 pt-6 sm:flex-row">
+      <Label className="text-center text-[11px] font-bold uppercase tracking-[0.3em] md:text-[13px]">Colour</Label>
       <RadioGroup
         className="flex justify-center"
         value={selectedColourValue}
         onValueChange={(value) => handleValueChange(value)}
       >
         <RadioGroupItem
-          className="h-[40px] w-[40px] dark:bg-secondary-peach"
+          className="h-[40px] w-[40px] bg-secondary-peach"
           value="#f87070"
           id="peach"
           variant="colour"
           isSelected={selectedColourValue === Colours.SecondaryPeach}
         />
         <RadioGroupItem
-          className="h-[40px] w-[40px] dark:bg-secondary-aqua"
+          className="h-[40px] w-[40px] bg-secondary-aqua"
           value="#70f3f8"
           id="aqua"
           variant="colour"
           isSelected={selectedColourValue === Colours.SecondaryAqua}
         />
         <RadioGroupItem
-          className="h-[40px] w-[40px] dark:bg-secondary-purple"
+          className="h-[40px] w-[40px] bg-secondary-purple"
           value="#d881f8"
           id="purple"
           variant="colour"

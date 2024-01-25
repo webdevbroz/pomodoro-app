@@ -18,15 +18,15 @@ export default function PomodoroFontSettings({ onFontChange }: PomodoroFontSetti
   };
 
   return (
-    <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
-      <Label className="text-center font-extrabold uppercase tracking-[0.4em]">Font</Label>
+    <div className="mx-6 flex flex-col items-center justify-between gap-5 border-t border-gray-200 pt-6 sm:flex-row">
+      <Label className="text-center text-[11px] font-bold uppercase tracking-[0.3em] md:text-[13px]">Font</Label>
       <RadioGroup
         className="flex justify-center"
         value={selectedFontValue}
         onValueChange={(value) => handleValueChange(value)}
       >
         <RadioGroupItem
-          className="h-[40px] w-[40px] font-space dark:bg-on-light-background"
+          className="h-[40px] w-[40px] bg-gray-100 font-space"
           value="font-space"
           id="font-space"
           variant="font"
@@ -34,7 +34,7 @@ export default function PomodoroFontSettings({ onFontChange }: PomodoroFontSetti
           isSelected={selectedFontValue === 'font-space'}
         />
         <RadioGroupItem
-          className="h-[40px] w-[40px] font-kumbh dark:bg-on-light-background"
+          className="h-[40px] w-[40px] bg-gray-100 font-kumbh"
           value="font-kumbh"
           id="font-kumbh"
           variant="font"
@@ -42,7 +42,7 @@ export default function PomodoroFontSettings({ onFontChange }: PomodoroFontSetti
           isSelected={selectedFontValue === 'font-kumbh'}
         />
         <RadioGroupItem
-          className="h-[40px] w-[40px] font-roboto dark:bg-on-light-background"
+          className="h-[40px] w-[40px] bg-gray-100 font-roboto"
           value="font-roboto"
           id="font-roboto"
           variant="font"

@@ -30,7 +30,7 @@ const RadioGroupItem = React.forwardRef<
       case 'font':
         if (selectedText) {
           return (
-            <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full font-bold text-on-dark-background dark:bg-app-background">
+            <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full text-white bg-app-background">
               {selectedText}
             </div>
           );

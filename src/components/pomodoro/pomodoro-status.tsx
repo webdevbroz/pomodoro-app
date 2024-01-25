@@ -15,7 +15,7 @@ export default function PomodoroStatus(): ReactElement {
 
   const RadioItems = ({ status }: { status: PomodoroStatus }): ReactElement => {
     function setstatusStyles<T extends PomodoroStatus>(status: T, value: T): string {
-      return status === value ? setColour() : 'text-gray-500 hover:text-on-dark-background';
+      return status === value ? setColour() : 'text-gray-500 hover:text-gray-200';
     }
 
     function setColour(): string {

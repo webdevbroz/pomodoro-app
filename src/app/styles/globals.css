@@ -5,9 +5,6 @@
 @layer base {
   :root {
     --app-background: #1e213f;
-    --on-light-background: #eff1fa;
-    --on-dark-background: #d7e0ff;
-    --settings-background: #ffffff;
 
     --primary-dark: #161932;
 

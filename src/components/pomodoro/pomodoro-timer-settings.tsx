@@ -50,16 +50,16 @@ export default function PomodoroTimerSettings({ onTimerChange }: PomodoroTimerSe
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <Label className="pb-3 text-center text-xs font-bold uppercase tracking-[0.4em] md:self-start">
+    <div className="mx-6 flex flex-col gap-2">
+      <Label className="pb-3 text-center text-[11px] font-bold uppercase tracking-[0.4em] md:self-start md:text-[13px]">
         Time (Minutes)
       </Label>
-      <div className="flex flex-col items-center gap-2 md:flex-row">
+      <div className="flex flex-col items-center gap-2 md:flex-row md:gap-5">
         <div className="flex w-full items-center justify-between md:flex-col md:items-start md:gap-2">
           <Label className="text-xs font-bold text-gray-400">pomodoro</Label>
           <Input
             name="pomodoro"
-            className={`font-bold ${setRingOffsetColor(colour)}`}
+            className={`bg-gray-100 font-bold ${setRingOffsetColor(colour)}`}
             type="number"
             onChange={handleTimeChange}
             value={selectedTime.pomodoro}
@@ -72,7 +72,7 @@ export default function PomodoroTimerSettings({ onTimerChange }: PomodoroTimerSe
           <Label className="text-xs font-bold text-gray-400">short break</Label>
           <Input
             name="shortBreak"
-            className={`font-bold ${setRingOffsetColor(colour)}`}
+            className={`bg-gray-100 font-bold ${setRingOffsetColor(colour)}`}
             type="number"
             onChange={handleTimeChange}
             value={selectedTime.shortBreak}
@@ -85,7 +85,7 @@ export default function PomodoroTimerSettings({ onTimerChange }: PomodoroTimerSe
           <Label className="text-xs font-bold text-gray-400">long break</Label>
           <Input
             name="longBreak"
-            className={`font-bold ${setRingOffsetColor(colour)}`}
+            className={`bg-gray-100 font-bold ${setRingOffsetColor(colour)}`}
             type="number"
             onChange={handleTimeChange}
             value={selectedTime.longBreak}
