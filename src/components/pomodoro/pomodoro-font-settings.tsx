@@ -18,9 +18,8 @@ export default function PomodoroFontSettings({ onFontChange }: PomodoroFontSetti
   };
 
   return (
-    <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
-      <Label className="text-center font-extrabold uppercase tracking-[0.4em]">Font</Label>
     <div className="flex flex-col items-center justify-between gap-5 sm:flex-row border-t border-gray-200 pt-6 mx-6">
+      <Label className="text-center font-bold uppercase tracking-[0.3em]">Font</Label>
       <RadioGroup
         className="flex justify-center"
         value={selectedFontValue}
