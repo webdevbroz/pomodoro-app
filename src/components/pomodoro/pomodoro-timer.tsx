@@ -10,12 +10,12 @@ import { setVariantAndColour } from '@/lib/utils';
 
   export default function PomodoroTimer(): ReactElement {
     const { status } = useSelector((state: ReduxState) => state.pomodoroStatus);
-    const { colour } = useSelector((state: ReduxState) => state.pomodoroSettings);
+    const { colour, time } = useSelector((state: ReduxState) => state.pomodoroSettings);
     const dispatch = useDispatch();
 
-    const pomodoroTime = 1500;
-    const shortBreakTime = 300;
-    const longBreakTime = 900;
+    const pomodoroTime = time.pomodoro * 60;
+    const shortBreakTime = time.shortBreak * 60;
+    const longBreakTime = time.longBreak * 60;
 
     const intervalId = useRef<number | null>(null);
     const [pomodoroCount, setPomodoroCount] = useState<number>(1);
@@ -76,14 +76,14 @@ import { setVariantAndColour } from '@/lib/utils';
       setTimeRemaining(longBreakTime);
       setIsFocusTime(false);
     }
-  }, [status]);
+  }, [longBreakTime, pomodoroTime, shortBreakTime, status]);
 
   useEffect(() => {
     if (timeRemaining === 0) {
       if (intervalId.current !== null) {
         clearInterval(intervalId.current);
       }
-      // clearInterval(intervalId.current);
+
       intervalId.current = null;
       if (isFocusTime && pomodoroCount == 4) {
         dispatch(pomodoroStatusSlice.actions.selectedTimer('long'));

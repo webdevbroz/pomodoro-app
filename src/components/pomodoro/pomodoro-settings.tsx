@@ -5,6 +5,7 @@ import { ReactElement, useState } from 'react';
 import Image from 'next/image';
 import PomodoroColourSettings from '@/components/pomodoro/pomodoro-colour-settings';
 import PomodoroFontSettings from '@/components/pomodoro/pomodoro-font-settings';
+import PomodoroTimerSettings, { PomodoroTimerData } from './pomodoro-timer-settings';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -22,10 +23,11 @@ import { X } from 'lucide-react';
 
 export default function PomodoroSettings(): ReactElement {
   const dispatch = useDispatch();
-  const { colour, font } = useSelector((state) => state.pomodoroSettings);
+  const { colour, font, time } = useSelector((state) => state.pomodoroSettings);
 
   const [selectedFont, setSelectedFont] = useState<string>(font);
   const [selectedColour, setSelectedColour] = useState<string>(colour);
+  const [selectedTime, setSelectedTime] = useState<PomodoroTimerData>(time);
   const [open, setOpen] = useState<boolean>(false);
 
   const handleFontChange = (font: string) => {
@@ -36,10 +38,15 @@ export default function PomodoroSettings(): ReactElement {
     setSelectedColour(colour);
   };
 
+  const handleTimeChange = (time: PomodoroTimerData) => {
+    setSelectedTime(time)
+  }
+
   const handleApplyNewSettings = () => {
     const settings = {
       font: selectedFont,
       colour: selectedColour,
+      time: selectedTime
     };
     dispatch(pomodoroSettingsSlice.actions.updateAllSettings(settings));
     setOpen(false);
@@ -57,7 +64,7 @@ export default function PomodoroSettings(): ReactElement {
       <DialogHeader className="border-b border-gray-200 px-6 pb-8 pt-6 text-left">
         <DialogTitle className="text-2xl font-bold">Settings</DialogTitle>
       </DialogHeader>
-      <PomodoroFontSettings onFontChange={handleFontChange} />
+      <PomodoroTimerSettings onTimerChange={handleTimeChange} />
       <PomodoroFontSettings onFontChange={handleFontChange} />
       <PomodoroColourSettings onColourChange={handleColourChange} />
       <DialogFooter>

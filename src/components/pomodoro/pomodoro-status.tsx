@@ -1,8 +1,8 @@
 'use client';
 
 import { ReactElement } from 'react';
-import { Label } from './ui/label';
-import { RadioGroup, RadioGroupItem } from './ui/radio-group';
+import { Label } from '../ui/label';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { PomodoroStatus } from '@/lib/redux/slices/pomodoroStatusSlice';
 import { pomodoroStatusSlice } from '@/lib/redux/slices/pomodoroStatusSlice';
 import { useSelector, useDispatch, ReduxState } from '@/lib/redux/store';

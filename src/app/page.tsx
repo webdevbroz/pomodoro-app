@@ -1,6 +1,6 @@
 import Pomodoro from '@/components/pomodoro/pomodoro';
 import Logo from '../components/logo';
-import PomodoroStatus from '@/components/pomodoro-status';
+import PomodoroStatus from '@/components/pomodoro/pomodoro-status';
 
 export default function Home() {
   return (
