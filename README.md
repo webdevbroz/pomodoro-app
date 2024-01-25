@@ -2,9 +2,9 @@
 
 <p align="center">
 
-<img  src="image.png" width=50% height=50%>
+<img  src="image.png" width=40% height=40%>
 
-<img  src="image-1.png" width=50% height=50%>
+<img  src="image-1.png" width=40% height=40%>
 </p>
 
 **Pomodoro app** is a group project application with a fully functional timer that follows the pomodoro technique at its core.
