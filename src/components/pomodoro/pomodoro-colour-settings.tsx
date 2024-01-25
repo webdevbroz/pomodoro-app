@@ -19,8 +19,8 @@ export default function PomodoroColourSettings({ onColourChange }: PomodoroColou
   };
 
   return (
-    <div className="flex flex-col items-center justify-between gap-5 sm:flex-row border-t border-gray-200 pt-6 mx-6">
-      <Label className="text-center font-bold uppercase tracking-[0.3em]">Colour</Label>
+    <div className="mx-6 flex flex-col items-center justify-between gap-5 border-t border-gray-200 pt-6 sm:flex-row">
+      <Label className="text-center text-[11px] font-bold uppercase tracking-[0.3em] md:text-[13px]">Colour</Label>
       <RadioGroup
         className="flex justify-center"
         value={selectedColourValue}
