@@ -2,10 +2,11 @@
 
 <p align="center">
 
-<img  src="image.png" width=40% height=40%>
+<img  src="https://github.com/webdevbroz/pomodoro-app/assets/27636896/fc2171e8-07f6-42ea-9ab1-186a39aefb23" width=300px height=500px>
 
-<img  src="image-1.png" width=40% height=40%>
+<img  src="https://github.com/webdevbroz/pomodoro-app/assets/27636896/b9a1a936-556a-484b-b675-502de326280f" width=350px height=500px>
 </p>
+
 
 **Pomodoro app** is a group project application with a fully functional timer that follows the pomodoro technique at its core.
 
